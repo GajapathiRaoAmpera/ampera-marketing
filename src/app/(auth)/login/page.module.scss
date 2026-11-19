@@ -1,0 +1,80 @@
+.title {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: var(--letter-spacing-tight);
+  margin-bottom: var(--space-2);
+}
+
+.subtitle {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-8);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.errorBanner {
+  padding: var(--space-3) var(--space-4);
+  background: var(--color-danger-50);
+  color: var(--color-danger-600);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-sm);
+}
+
+.forgotPasswordRow {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: calc(var(--space-5) * -1);
+}
+
+.forgotPasswordLink {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+
+  &:hover {
+    color: var(--color-text-primary);
+  }
+}
+
+.footer {
+  margin-top: var(--space-6);
+  text-align: center;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin: var(--space-5) 0;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-tertiary);
+
+  &::before,
+  &::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+  }
+
+  // Each line fades from nothing at the outer edge to the border color
+  // where it meets the "or" text, instead of a flat solid rule.
+  &::before {
+    background: linear-gradient(to right, transparent, var(--color-border-subtle));
+  }
+
+  &::after {
+    background: linear-gradient(to left, transparent, var(--color-border-subtle));
+  }
+}
+
+.socialButtons {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}

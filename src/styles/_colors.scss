@@ -1,0 +1,283 @@
+// ==========================================================================
+// Color tokens
+// Base neutral scale is a cool slate; brand is Ampera purple → lavender → navy
+// (see ampera-landing CLAUDE.md §3). Every color is exposed as a CSS custom property so
+// components can react to the [data-theme] attribute on <html> without a
+// SCSS rebuild.
+// ==========================================================================
+
+// --- Raw palette (do not use directly in components - use the CSS vars) ---
+
+$slate-0:   #ffffff;
+$slate-25:  #fafbfc;
+$slate-50:  #f5f7fa;
+$slate-100: #eceff3;
+$slate-150: #e3e7ed;
+$slate-200: #d9dee6;
+$slate-300: #c1c9d4;
+$slate-400: #9aa5b3;
+$slate-500: #717d8d;
+$slate-600: #545e6d;
+$slate-700: #3d4453;
+$slate-800: #262b37;
+$slate-850: #1c202a;
+$slate-900: #14171f;
+$slate-950: #0b0d12;
+
+// Ampera purple (#9C369A) - the primary brand scale
+$purple-50:  #fbf2fb;
+$purple-100: #f4e1f3;
+$purple-200: #e9c3e8;
+$purple-300: #d98fd7;
+$purple-400: #c060be;
+$purple-500: #9c369a;
+$purple-600: #832a81;
+$purple-700: #6a2169;
+$purple-800: #4d184c;
+$purple-900: #331032;
+
+// Ampera lavender (the logo's lettering) - gradient midpoint
+$lavender-400: #9a8fcc;
+$lavender-500: #7b6db3;
+
+// Ampera navy (#000F5C) - the dark end of the brand gradient
+$navy-400: #2a3a96;
+$navy-500: #000f5c;
+
+// Ampera neutrals
+$ivory: #fffefa;
+$ink: #050505;
+
+$emerald-50:  #e9fbf3;
+$emerald-400: #34d399;
+$emerald-500: #16b981;
+$emerald-600: #0d9668;
+
+$amber-50:  #fff8e8;
+$amber-400: #f8b84c;
+$amber-500: #f0990e;
+$amber-600: #c97806;
+
+$rose-50:  #ffeff1;
+$rose-400: #fb6f84;
+$rose-500: #f13d5c;
+$rose-600: #cf2249;
+
+$sky-50:  #eaf6ff;
+$sky-400: #4fb2f2;
+$sky-500: #1f96e0;
+$sky-600: #1276bb;
+
+// --- Semantic light-theme tokens --------------------------------------
+
+:root {
+  // Surfaces
+  --color-bg-canvas: #{$ivory};
+  --color-bg-surface: #{$slate-0};
+  --color-bg-surface-raised: #{$slate-0};
+  --color-bg-surface-sunken: #{$slate-50};
+  --color-bg-overlay: rgba(11, 13, 18, 0.48);
+  --color-bg-hover: #{$slate-100};
+  --color-bg-active: #{$slate-150};
+  --color-bg-selected: #{$purple-50};
+
+  // Borders. One step darker than the surfaces they sit between: a white
+  // card on the near-white canvas needs more than slate-150 to read as an edge.
+  --color-border-subtle: #{$slate-200};
+  --color-border-default: #{$slate-300};
+  --color-border-strong: #{$slate-400};
+  --color-border-focus: #{$purple-500};
+
+  // Text
+  --color-text-primary: #{$ink};
+  --color-text-secondary: #{$slate-600};
+  --color-text-tertiary: #{$slate-400};
+  --color-text-disabled: #{$slate-300};
+  --color-text-inverse: #{$slate-0};
+  --color-text-link: #{$purple-600};
+
+  // Brand
+  --color-brand-50: #{$purple-50};
+  --color-brand-100: #{$purple-100};
+  --color-brand-300: #{$purple-300};
+  --color-brand-400: #{$purple-400};
+  --color-brand-500: #{$purple-500};
+  --color-brand-600: #{$purple-600};
+  --color-brand-700: #{$purple-700};
+  --color-brand-contrast: #{$slate-0};
+  // Ampera purple → navy, as on amperatech.ai.
+  --gradient-brand: linear-gradient(135deg, #{$purple-500} 0%, #{$navy-500} 100%);
+  --gradient-brand-soft: linear-gradient(135deg, #{$purple-50} 0%, #{$lavender-400}1a 100%);
+  --gradient-brand-vivid: linear-gradient(120deg, #{$purple-400} 0%, #{$lavender-500} 100%);
+
+  // Status
+  --color-success-50: #{$emerald-50};
+  --color-success-400: #{$emerald-400};
+  --color-success-500: #{$emerald-500};
+  --color-success-600: #{$emerald-600};
+
+  --color-warning-50: #{$amber-50};
+  --color-warning-400: #{$amber-400};
+  --color-warning-500: #{$amber-500};
+  --color-warning-600: #{$amber-600};
+
+  --color-danger-50: #{$rose-50};
+  --color-danger-400: #{$rose-400};
+  --color-danger-500: #{$rose-500};
+  --color-danger-600: #{$rose-600};
+
+  --color-info-50: #{$sky-50};
+  --color-info-400: #{$sky-400};
+  --color-info-500: #{$sky-500};
+  --color-info-600: #{$sky-600};
+
+  // Channel brand colors
+  --color-whatsapp: #25d366;
+  --color-whatsapp-dark: #128c4a;
+  --color-instagram: #c13584;
+  --color-messenger: #0084ff;
+  --color-voice: #6366f1;
+
+  // Shadows (light theme - soft, cool-toned)
+  --shadow-xs: 0 1px 2px rgba(20, 23, 31, 0.05);
+  --shadow-sm: 0 1px 3px rgba(20, 23, 31, 0.08), 0 1px 2px rgba(20, 23, 31, 0.04);
+  --shadow-md: 0 4px 10px rgba(20, 23, 31, 0.07), 0 2px 4px rgba(20, 23, 31, 0.04);
+  --shadow-lg: 0 12px 24px rgba(20, 23, 31, 0.09), 0 4px 8px rgba(20, 23, 31, 0.05);
+  --shadow-xl: 0 24px 48px rgba(20, 23, 31, 0.14), 0 8px 16px rgba(20, 23, 31, 0.06);
+  --shadow-brand-glow: 0 8px 24px rgba(156, 54, 154, 0.32);
+
+  color-scheme: light;
+}
+
+// --- Semantic dark-theme tokens ----------------------------------------
+// Wins when the OS prefers dark AND no explicit light override is set.
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --color-bg-canvas: #{$slate-950};
+    --color-bg-surface: #{$slate-900};
+    --color-bg-surface-raised: #{$slate-850};
+    --color-bg-surface-sunken: #{$slate-950};
+    --color-bg-overlay: rgba(4, 5, 8, 0.64);
+    --color-bg-hover: #{$slate-850};
+    --color-bg-active: #{$slate-800};
+    --color-bg-selected: rgba(192, 96, 190, 0.16);
+
+    --color-border-subtle: #{$slate-800};
+    --color-border-default: #{$slate-700};
+    --color-border-strong: #{$slate-600};
+    --color-border-focus: #{$purple-400};
+
+    --color-text-primary: #{$slate-50};
+    --color-text-secondary: #{$slate-400};
+    --color-text-tertiary: #{$slate-500};
+    --color-text-disabled: #{$slate-700};
+    --color-text-inverse: #{$slate-950};
+    --color-text-link: #{$purple-300};
+
+    --color-brand-50: rgba(192, 96, 190, 0.12);
+    --color-brand-100: rgba(192, 96, 190, 0.2);
+    --color-brand-300: #{$purple-300};
+    --color-brand-400: #{$purple-400};
+    --color-brand-500: #{$purple-400};
+    --color-brand-600: #{$purple-300};
+    --color-brand-700: #{$purple-200};
+    --color-brand-contrast: #{$slate-950};
+    --gradient-brand: linear-gradient(135deg, #{$purple-400} 0%, #{$navy-400} 100%);
+    --gradient-brand-soft: linear-gradient(135deg, rgba(192, 96, 190, 0.16) 0%, rgba(123, 109, 179, 0.12) 100%);
+    --gradient-brand-vivid: linear-gradient(120deg, #{$purple-300} 0%, #{$navy-400} 100%);
+
+    --color-success-50: rgba(22, 185, 129, 0.12);
+    --color-warning-50: rgba(240, 153, 14, 0.12);
+    --color-danger-50: rgba(241, 61, 92, 0.12);
+    --color-info-50: rgba(31, 150, 224, 0.12);
+
+    --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.3);
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4), 0 1px 2px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 4px 10px rgba(0, 0, 0, 0.45), 0 2px 4px rgba(0, 0, 0, 0.3);
+    --shadow-lg: 0 12px 24px rgba(0, 0, 0, 0.5), 0 4px 8px rgba(0, 0, 0, 0.35);
+    --shadow-xl: 0 24px 48px rgba(0, 0, 0, 0.6), 0 8px 16px rgba(0, 0, 0, 0.4);
+    --shadow-brand-glow: 0 8px 28px rgba(192, 96, 190, 0.38);
+
+    color-scheme: dark;
+  }
+}
+
+// --- Explicit theme override (data-theme attribute wins both ways) -----
+:root[data-theme="dark"] {
+  --color-bg-canvas: #{$slate-950};
+  --color-bg-surface: #{$slate-900};
+  --color-bg-surface-raised: #{$slate-850};
+  --color-bg-surface-sunken: #{$slate-950};
+  --color-bg-overlay: rgba(4, 5, 8, 0.64);
+  --color-bg-hover: #{$slate-850};
+  --color-bg-active: #{$slate-800};
+  --color-bg-selected: rgba(192, 96, 190, 0.16);
+
+  --color-border-subtle: #{$slate-800};
+  --color-border-default: #{$slate-700};
+  --color-border-strong: #{$slate-600};
+  --color-border-focus: #{$purple-400};
+
+  --color-text-primary: #{$slate-50};
+  --color-text-secondary: #{$slate-400};
+  --color-text-tertiary: #{$slate-500};
+  --color-text-disabled: #{$slate-700};
+  --color-text-inverse: #{$slate-950};
+  --color-text-link: #{$purple-300};
+
+  --color-brand-50: rgba(192, 96, 190, 0.12);
+  --color-brand-100: rgba(192, 96, 190, 0.2);
+  --color-brand-300: #{$purple-300};
+  --color-brand-400: #{$purple-400};
+  --color-brand-500: #{$purple-400};
+  --color-brand-600: #{$purple-300};
+  --color-brand-700: #{$purple-200};
+  --color-brand-contrast: #{$slate-950};
+  --gradient-brand: linear-gradient(135deg, #{$purple-400} 0%, #{$navy-400} 100%);
+  --gradient-brand-soft: linear-gradient(135deg, rgba(192, 96, 190, 0.16) 0%, rgba(123, 109, 179, 0.12) 100%);
+  --gradient-brand-vivid: linear-gradient(120deg, #{$purple-300} 0%, #{$navy-400} 100%);
+
+  --color-success-50: rgba(22, 185, 129, 0.12);
+  --color-warning-50: rgba(240, 153, 14, 0.12);
+  --color-danger-50: rgba(241, 61, 92, 0.12);
+  --color-info-50: rgba(31, 150, 224, 0.12);
+
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4), 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 10px rgba(0, 0, 0, 0.45), 0 2px 4px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 12px 24px rgba(0, 0, 0, 0.5), 0 4px 8px rgba(0, 0, 0, 0.35);
+  --shadow-xl: 0 24px 48px rgba(0, 0, 0, 0.6), 0 8px 16px rgba(0, 0, 0, 0.4);
+  --shadow-brand-glow: 0 8px 28px rgba(192, 96, 190, 0.38);
+
+  color-scheme: dark;
+}
+
+// --- Aliases -------------------------------------------------------------
+// Names that pages were written against but that were never defined. An
+// undefined variable makes the whole declaration invalid, so `border: 1px
+// solid var(--color-border)` rendered no border at all. Each alias points at
+// a semantic token above, so it follows the active theme.
+:root {
+  --color-border: var(--color-border-default);
+  --border-color: var(--color-border-default);
+  --color-surface: var(--color-bg-surface);
+  --color-surface-secondary: var(--color-bg-surface-sunken);
+  --color-background: var(--color-bg-canvas);
+  --color-bg-page: var(--color-bg-canvas);
+  --color-bg-secondary: var(--color-bg-surface-sunken);
+  --color-bg-subtle: var(--color-bg-surface-sunken);
+  --color-bg-elevated: var(--color-bg-surface-raised);
+  --bg-secondary: var(--color-bg-surface-sunken);
+  --bg-tertiary: var(--color-bg-hover);
+  --text-secondary: var(--color-text-secondary);
+  --brand-primary: var(--color-brand-600);
+
+  // Missing steps of the status scales, mixed from the steps that exist.
+  --color-success-300: color-mix(in srgb, var(--color-success-500) 45%, transparent);
+  --color-warning-100: color-mix(in srgb, var(--color-warning-500) 18%, transparent);
+  --color-warning-200: color-mix(in srgb, var(--color-warning-500) 30%, transparent);
+  --color-warning-300: color-mix(in srgb, var(--color-warning-500) 45%, transparent);
+  --color-warning-700: var(--color-warning-600);
+  --color-warning-800: var(--color-warning-600);
+  --color-danger-700: var(--color-danger-600);
+}

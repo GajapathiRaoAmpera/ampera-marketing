@@ -1,0 +1,60 @@
+@use "@/styles/mixins";
+
+.wrap {
+  // Containing block for the visually hidden checkbox below. Without it the
+  // absolutely positioned input escapes every scroll container, makes the
+  // whole document taller than the viewport, and focusing it (any toggle)
+  // scrolls the page shell out of view.
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  cursor: pointer;
+
+  &.disabled {
+    cursor: not-allowed;
+    opacity: 0.55;
+  }
+}
+
+.track {
+  @include mixins.transition(background-color);
+  @include mixins.focus-ring;
+
+  position: relative;
+  width: 40px;
+  height: 24px;
+  border-radius: var(--radius-full);
+  background: var(--color-border-strong);
+  flex-shrink: 0;
+}
+
+.track.checked {
+  background: var(--gradient-brand);
+}
+
+.thumb {
+  @include mixins.transition($props: transform, $ease: var(--ease-spring));
+
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: white;
+  box-shadow: var(--shadow-sm);
+}
+
+.checked .thumb {
+  transform: translateX(16px);
+}
+
+.label {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-primary);
+}
+
+.hiddenInput {
+  @include mixins.visually-hidden;
+}

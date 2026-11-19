@@ -1,0 +1,143 @@
+@forward "colors";
+@forward "typography";
+@forward "spacing";
+@forward "breakpoints";
+@forward "mixins";
+
+@use "colors";
+@use "typography";
+@use "spacing";
+@use "mixins";
+
+// ==========================================================================
+// Global reset + base element styles
+// ==========================================================================
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  background: var(--color-bg-canvas);
+  color: var(--color-text-primary);
+  font-family: var(--font-sans);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-normal);
+  font-weight: var(--font-weight-regular);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100dvh;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--letter-spacing-tight);
+  color: var(--color-text-primary);
+}
+
+p {
+  margin: 0;
+}
+
+a {
+  color: var(--color-text-link);
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+::selection {
+  background: var(--color-brand-100);
+  color: var(--color-text-primary);
+}
+
+// Respect reduced-motion preference globally
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+// Focus outline baseline (components override via mixins.focus-ring for a nicer ring)
+:focus-visible {
+  outline: 2px solid var(--color-border-focus);
+  outline-offset: 2px;
+}
+
+#__next,
+#root {
+  isolation: isolate;
+}
+
+// Phones: a field under 16px makes iOS Safari zoom the page in on focus, and
+// the page then stays zoomed. Keep every text field at 16px on small screens.
+@media (max-width: 767px) {
+  html body :is(input:not([type="checkbox"], [type="radio"], [type="range"], [type="color"]), select, textarea) {
+    font-size: 16px;
+  }
+}
+
+// Never let one wide element push the whole page sideways.
+html,
+body {
+  max-width: 100%;
+  overflow-x: clip;
+}
+
+img,
+video,
+canvas,
+svg {
+  max-width: 100%;
+}

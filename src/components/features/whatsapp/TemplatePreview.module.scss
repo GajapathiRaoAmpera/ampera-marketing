@@ -1,0 +1,110 @@
+.phoneFrame {
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: #e5ddd5;
+}
+
+.chatBackground {
+  padding: var(--space-5) var(--space-4);
+  min-height: 220px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-2);
+  background-image: radial-gradient(circle at 20% 20%, rgba(0, 0, 0, 0.02) 0%, transparent 40%);
+}
+
+.bubble {
+  max-width: 280px;
+  background: #fff;
+  border-radius: 8px;
+  padding: var(--space-2) var(--space-3) var(--space-1);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+  position: relative;
+}
+
+.headerText {
+  font-weight: var(--font-weight-bold);
+  font-size: 14.5px;
+  color: #111b21;
+  margin-bottom: 4px;
+}
+
+.mediaPlaceholder {
+  background: #f0f0f0;
+  border-radius: 6px;
+  padding: var(--space-5) var(--space-3);
+  text-align: center;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-tertiary);
+  margin-bottom: 6px;
+}
+
+.bodyText {
+  font-size: 14.5px;
+  line-height: 1.4;
+  color: #111b21;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.placeholder {
+  color: #9094a6;
+  font-style: italic;
+}
+
+.footerText {
+  font-size: 12.5px;
+  color: #667781;
+  margin-top: 4px;
+}
+
+.timestamp {
+  font-size: 11px;
+  color: #667781;
+  text-align: right;
+  margin-top: 2px;
+}
+
+.buttonStack {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 280px;
+  margin-top: -2px;
+}
+
+.buttonRow {
+  background: #fff;
+  color: #00a5f4;
+  text-align: center;
+  font-size: 14px;
+  font-weight: var(--font-weight-medium);
+  padding: 10px;
+  border-top: 1px solid #f0f0f0;
+
+  &:first-child {
+    border-top: 1px solid #e5e5e5;
+  }
+}
+
+.carouselTrack {
+  display: flex;
+  gap: var(--space-2);
+  width: 100%;
+  overflow-x: auto;
+  padding-bottom: var(--space-2);
+}
+
+.carouselCard {
+  flex: 0 0 210px;
+  background: #fff;
+  border-radius: 8px;
+  padding: var(--space-2);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+
+  .buttonRow {
+    margin: var(--space-2) calc(var(--space-2) * -1) calc(var(--space-2) * -1);
+  }
+}

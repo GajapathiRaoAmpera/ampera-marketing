@@ -1,0 +1,76 @@
+@use "@/styles/mixins";
+
+.stack {
+  position: fixed;
+  bottom: var(--space-6);
+  right: var(--space-6);
+  z-index: var(--z-toast);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  max-width: min(380px, calc(100vw - var(--space-8)));
+}
+
+.toast {
+  @include mixins.surface-card(var(--radius-lg));
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  box-shadow: var(--shadow-lg);
+  animation: slide-in var(--duration-slow) var(--ease-spring);
+}
+
+.icon {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  margin-top: 1px;
+}
+
+.message {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-primary);
+  line-height: var(--line-height-snug);
+}
+
+.default .icon {
+  color: var(--color-brand-500);
+}
+
+.success .icon {
+  color: var(--color-success-500);
+}
+
+.error .icon {
+  color: var(--color-danger-500);
+}
+
+.warning .icon {
+  color: var(--color-warning-500);
+}
+
+.dismiss {
+  @include mixins.button-reset;
+  margin-left: auto;
+  color: var(--color-text-tertiary);
+  padding: var(--space-1);
+  border-radius: var(--radius-sm);
+  @include mixins.transition(color background);
+
+  &:hover {
+    color: var(--color-text-primary);
+    background: var(--color-bg-hover);
+  }
+}
+
+@keyframes slide-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}

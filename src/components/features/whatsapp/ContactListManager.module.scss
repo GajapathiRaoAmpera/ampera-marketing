@@ -1,0 +1,38 @@
+@use "@/styles/breakpoints";
+
+.uploadRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-2);
+}
+
+.nameInput {
+  flex: 1;
+  min-width: 200px;
+
+  @include breakpoints.from(breakpoints.$bp-md) {
+    max-width: 320px;
+  }
+}
+
+.fileInput {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+}
+
+.helperText {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-tertiary);
+  margin-bottom: var(--space-5);
+  line-height: var(--line-height-normal);
+}
+
+.nameCell {
+  font-weight: var(--font-weight-medium);
+}
+
+.noneText {
+  color: var(--color-text-tertiary);
+}

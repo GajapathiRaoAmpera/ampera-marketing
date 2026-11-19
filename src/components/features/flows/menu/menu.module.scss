@@ -1,0 +1,519 @@
+@use "@/styles/mixins";
+@use "@/styles/breakpoints";
+
+.section {
+  @include mixins.surface-card(var(--radius-xl));
+  display: grid;
+  gap: var(--space-4);
+  padding: var(--space-5);
+  min-width: 0;
+
+  @include breakpoints.until(breakpoints.$bp-md) {
+    padding: var(--space-4);
+  }
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
+.headText {
+  flex: 1;
+  min-width: 200px;
+
+  h3 {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: var(--font-size-lg);
+  }
+
+  p {
+    margin: 2px 0 0;
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+  }
+}
+
+.muted,
+.hint {
+  margin: 0;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+.hint {
+  font-size: var(--font-size-xs);
+}
+
+// Starting points
+
+.starters {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
+  gap: var(--space-3);
+}
+
+.starter {
+  @include mixins.button-reset;
+  @include mixins.focus-ring;
+  display: grid;
+  gap: 2px;
+  padding: var(--space-4);
+  border: 1.5px dashed var(--color-border-default);
+  border-radius: var(--radius-lg);
+  text-align: left;
+  cursor: pointer;
+  @include mixins.transition((border-color, background));
+
+  strong {
+    font-size: var(--font-size-md);
+  }
+
+  span {
+    font-size: var(--font-size-xs);
+    color: var(--color-text-secondary);
+  }
+
+  &:hover {
+    border-style: solid;
+    border-color: var(--color-whatsapp);
+    background: color-mix(in srgb, var(--color-whatsapp) 6%, var(--color-bg-surface));
+  }
+}
+
+// Saved menus
+
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--space-2);
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-lg);
+  flex-wrap: wrap;
+}
+
+.itemText {
+  display: grid;
+  gap: 2px;
+  flex: 1;
+  min-width: 160px;
+
+  strong {
+    font-size: var(--font-size-md);
+  }
+
+  span {
+    font-size: var(--font-size-xs);
+    color: var(--color-text-secondary);
+    overflow-wrap: anywhere;
+  }
+}
+
+.liveSwitch {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-secondary);
+}
+
+.itemActions,
+.optionTools {
+  display: inline-flex;
+  gap: 2px;
+}
+
+.iconAction {
+  @include mixins.button-reset;
+  @include mixins.focus-ring;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-md);
+  display: grid;
+  place-items: center;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+
+  &:hover:not(:disabled) {
+    background: var(--color-bg-hover);
+    color: var(--color-text-primary);
+  }
+
+  &:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
+}
+
+// Editor
+
+.editorTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+
+  h3 {
+    margin: 2px 0 0;
+    font-size: var(--font-size-xl);
+  }
+}
+
+.eyebrow {
+  font-size: var(--font-size-2xs);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--letter-spacing-wider);
+  text-transform: uppercase;
+  color: var(--color-whatsapp-dark);
+}
+
+.editor {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 300px;
+  gap: var(--space-5);
+  align-items: start;
+
+  @include breakpoints.until(breakpoints.$bp-lg) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.editorMain {
+  display: grid;
+  gap: var(--space-4);
+  min-width: 0;
+}
+
+.startsWhen {
+  display: grid;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  border-radius: var(--radius-lg);
+  background: var(--color-bg-surface-sunken);
+
+  > strong {
+    font-size: var(--font-size-sm);
+  }
+}
+
+.menuCard,
+.subMenu {
+  display: grid;
+  gap: var(--space-3);
+  min-width: 0;
+  justify-items: stretch;
+
+  > button {
+    justify-self: start;
+  }
+}
+
+.subMenu {
+  padding: var(--space-3) 0 0 var(--space-3);
+  border-left: 2px solid var(--color-whatsapp);
+}
+
+.options {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--space-3);
+}
+
+.option {
+  display: grid;
+  gap: var(--space-2);
+  padding: var(--space-3);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-lg);
+  min-width: 0;
+}
+
+.optionTop {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.optionNumber {
+  flex-shrink: 0;
+  width: 26px;
+  height: 26px;
+  border-radius: var(--radius-full);
+  display: grid;
+  place-items: center;
+  background: color-mix(in srgb, var(--color-whatsapp) 15%, var(--color-bg-surface));
+  color: var(--color-whatsapp-dark);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+}
+
+.titleInput {
+  flex: 1;
+  min-width: 0;
+  height: 38px;
+  padding: 0 var(--space-3);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-surface);
+  color: var(--color-text-primary);
+  font: inherit;
+  font-size: 16px;
+  font-weight: var(--font-weight-medium);
+
+  &:focus {
+    outline: none;
+    border-color: var(--color-border-focus);
+  }
+}
+
+.kinds {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+}
+
+.kind,
+.kindOn {
+  @include mixins.button-reset;
+  @include mixins.focus-ring;
+  padding: 5px var(--space-3);
+  border-radius: var(--radius-full);
+  border: 1px solid var(--color-border-subtle);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+}
+
+.kindOn {
+  border-color: var(--color-whatsapp-dark);
+  background: var(--color-whatsapp-dark);
+  color: #fff;
+}
+
+// Preview
+
+.previewWrap {
+  position: sticky;
+  top: var(--space-4);
+  display: grid;
+  gap: var(--space-2);
+  justify-items: center;
+
+  @include breakpoints.until(breakpoints.$bp-lg) {
+    position: static;
+  }
+}
+
+.phone {
+  width: 100%;
+  max-width: 300px;
+  border: 8px solid var(--color-text-primary);
+  border-radius: 30px;
+  overflow: hidden;
+  background: #e8e0d8;
+}
+
+.phoneBar {
+  padding: var(--space-3);
+  background: #128c4a;
+  color: #fff;
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  text-align: center;
+}
+
+.chat {
+  display: grid;
+  gap: var(--space-2);
+  min-height: 340px;
+  align-content: start;
+  padding: var(--space-3);
+  color: #172033;
+}
+
+.bubbleYou,
+.bubbleThem,
+.menuBubble {
+  max-width: 92%;
+  padding: var(--space-2) var(--space-3);
+  border-radius: 12px;
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-snug);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.bubbleYou,
+.menuBubble {
+  justify-self: start;
+  background: #fff;
+}
+
+.bubbleThem {
+  justify-self: end;
+  background: #d9fdd3;
+}
+
+.menuBubble {
+  display: grid;
+  gap: var(--space-1);
+  width: 92%;
+
+  p {
+    margin: 0 0 var(--space-1);
+  }
+}
+
+.listHint {
+  font-size: var(--font-size-2xs);
+  color: #667781;
+}
+
+.chatButton {
+  @include mixins.button-reset;
+  padding: 7px;
+  border-top: 1px solid #e5e7eb;
+  color: #0a7cff;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  text-align: center;
+  cursor: pointer;
+
+  &:hover {
+    background: #f3f4f6;
+  }
+}
+
+.restart {
+  @include mixins.button-reset;
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-link);
+  cursor: pointer;
+}
+
+.footer {
+  position: sticky;
+  bottom: 0;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-3) 0 0;
+  border-top: 1px solid var(--color-border-subtle);
+  background: var(--color-bg-surface);
+}
+
+.problem {
+  font-size: var(--font-size-sm);
+  color: var(--color-warning-600);
+}
+
+.ready {
+  font-size: var(--font-size-sm);
+  color: var(--color-success-600);
+}
+
+// How a first menu works, shown before there is one.
+.howItWorks {
+  list-style: none;
+  counter-reset: how;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
+  gap: var(--space-3);
+
+  li {
+    counter-increment: how;
+    display: grid;
+    gap: 2px;
+    padding: var(--space-3);
+    border-radius: var(--radius-lg);
+    background: var(--color-bg-subtle);
+    font-size: var(--font-size-xs);
+    color: var(--color-text-secondary);
+
+    strong {
+      font-size: var(--font-size-sm);
+      color: var(--color-text-primary);
+
+      &::before {
+        content: counter(how) ". ";
+        color: #128c4a;
+      }
+    }
+  }
+}
+
+.kindHint {
+  margin: 0;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+}
+
+.linkFields {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: var(--space-3);
+
+  @include breakpoints.until(breakpoints.$bp-md) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.shopNote {
+  margin: 0;
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-md);
+  background: color-mix(in srgb, #25d366 10%, var(--color-bg-surface));
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+}
+
+.bubbleImage {
+  display: block;
+  width: 100%;
+  max-height: 140px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: var(--space-1);
+}
+
+.bubbleNote {
+  display: block;
+  margin-top: 4px;
+  padding-top: 4px;
+  border-top: 1px dashed rgba(0, 0, 0, 0.12);
+  font-size: 11px;
+  color: #667781;
+}
+
+.bubbleLink {
+  display: block;
+  margin-top: 6px;
+  padding-top: 6px;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  text-align: center;
+  font-weight: var(--font-weight-semibold);
+  color: #027eb5;
+}

@@ -1,0 +1,1339 @@
+@use "@/styles/mixins";
+
+// Chart series colors (validated pair: inbound blue, outbound orange).
+.chartScope {
+  --series-inbound: #2a78d6;
+  --series-outbound: #eb6834;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .chartScope {
+    --series-inbound: #3987e5;
+    --series-outbound: #d95926;
+  }
+}
+
+:root[data-theme="dark"] .chartScope {
+  --series-inbound: #3987e5;
+  --series-outbound: #d95926;
+}
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.toolbar {
+  display: flex;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+.toolbarGrow {
+  flex: 1;
+  min-width: 200px;
+}
+
+.spacer {
+  flex: 1;
+}
+
+.sectionTitle {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+}
+
+.sectionHint {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  margin-top: var(--space-1);
+  line-height: 1.5;
+}
+
+.muted {
+  color: var(--color-text-tertiary);
+  font-size: var(--font-size-xs);
+}
+
+// ── KPI tiles ──
+.kpiGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: var(--space-4);
+}
+
+.kpi {
+  @include mixins.surface-card;
+  padding: var(--space-4) var(--space-5);
+}
+
+.kpiLabel {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+}
+
+.kpiValue {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: -0.02em;
+  margin-top: var(--space-1);
+  font-variant-numeric: tabular-nums;
+}
+
+.kpiNote {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-tertiary);
+  margin-top: var(--space-1);
+}
+
+// ── Insights ──
+.insightList {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--space-3);
+}
+
+.insight {
+  @include mixins.button-reset;
+  text-align: left;
+  padding: var(--space-4);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border-subtle);
+  border-left: 3px solid var(--color-info-500);
+  background: var(--color-bg-surface);
+  cursor: pointer;
+  @include mixins.transition(border-color box-shadow);
+
+  &:hover {
+    box-shadow: var(--shadow-sm);
+  }
+
+  &:focus-visible {
+    @include mixins.focus-ring;
+  }
+}
+
+.insightGood {
+  border-left-color: var(--color-success-500);
+}
+
+.insightWarn {
+  border-left-color: var(--color-warning-500);
+}
+
+.insightTitle {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+}
+
+.insightDetail {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+  margin-top: var(--space-1);
+  line-height: 1.5;
+}
+
+// ── Charts ──
+.twoCol {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+  gap: var(--space-5);
+  align-items: start;
+}
+
+.legend {
+  display: flex;
+  gap: var(--space-4);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+}
+
+.legendSwatch {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  margin-right: var(--space-1);
+}
+
+.bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 160px;
+  margin-top: var(--space-4);
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.barSlot {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 2px;
+
+  &:hover .tooltip,
+  &:focus-visible .tooltip {
+    display: block;
+  }
+
+  &:hover {
+    background: var(--color-bg-hover);
+  }
+}
+
+.barSegment {
+  width: 100%;
+  max-width: 22px;
+  min-height: 2px;
+}
+
+.barTop {
+  border-radius: 4px 4px 0 0;
+}
+
+.barInbound {
+  background: var(--series-inbound);
+}
+
+.barOutbound {
+  background: var(--series-outbound);
+}
+
+.barSingle {
+  background: var(--series-inbound);
+}
+
+.barBest {
+  outline: 2px solid var(--color-text-primary);
+  outline-offset: 1px;
+}
+
+.axis {
+  display: flex;
+  justify-content: space-between;
+  font-size: var(--font-size-2xs);
+  color: var(--color-text-tertiary);
+  margin-top: var(--space-1);
+}
+
+.tooltip {
+  display: none;
+  position: absolute;
+  bottom: calc(100% + 4px);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 5;
+  white-space: nowrap;
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-md);
+  background: var(--color-text-primary);
+  color: var(--color-bg-surface);
+  font-size: var(--font-size-xs);
+  line-height: 1.5;
+  pointer-events: none;
+}
+
+.breakdown {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin-top: var(--space-4);
+}
+
+.breakdownRow {
+  display: grid;
+  grid-template-columns: 150px 1fr 36px;
+  align-items: center;
+  gap: var(--space-3);
+  font-size: var(--font-size-sm);
+}
+
+.breakdownTrack {
+  height: 8px;
+  border-radius: var(--radius-full);
+  background: var(--color-bg-hover);
+  overflow: hidden;
+}
+
+.breakdownFill {
+  height: 100%;
+  border-radius: var(--radius-full);
+  background: var(--series-inbound);
+}
+
+.breakdownCount {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  color: var(--color-text-secondary);
+}
+
+// ── Lists ──
+.list {
+  display: flex;
+  flex-direction: column;
+}
+
+.listRow {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  padding: var(--space-3) 0;
+  border-bottom: 1px solid var(--color-border-subtle);
+  font-size: var(--font-size-sm);
+
+  &:last-child {
+    border-bottom: 0;
+  }
+}
+
+.listMain {
+  flex: 1;
+  min-width: 180px;
+}
+
+.listTitle {
+  font-weight: var(--font-weight-medium);
+}
+
+.livePulse {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-success-500);
+  animation: pulse 1.6s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  50% {
+    opacity: 0.3;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .livePulse {
+    animation: none;
+  }
+}
+
+// ── Checklist ──
+.checklist {
+  display: grid;
+  gap: var(--space-2);
+  margin-top: var(--space-4);
+}
+
+.checkItem {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-size: var(--font-size-sm);
+}
+
+.checkMark {
+  @include mixins.flex-center;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  border: 1.5px solid var(--color-border-strong);
+  font-size: 11px;
+  color: transparent;
+}
+
+.checkDone {
+  background: var(--color-success-500);
+  border-color: var(--color-success-500);
+  color: white;
+}
+
+// ── Forms ──
+.formGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--space-4);
+  margin-top: var(--space-4);
+}
+
+.fullWidth {
+  grid-column: 1 / -1;
+}
+
+.ruleHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+
+.days {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.day {
+  @include mixins.button-reset;
+  min-width: 44px;
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border-default);
+  font-size: var(--font-size-sm);
+  text-align: center;
+  cursor: pointer;
+
+  &:focus-visible {
+    @include mixins.focus-ring;
+  }
+}
+
+.dayOn {
+  background: var(--color-brand-500);
+  border-color: var(--color-brand-500);
+  color: var(--color-brand-contrast);
+}
+
+.fieldLabel {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  margin-bottom: var(--space-2);
+}
+
+.saveBar {
+  position: sticky;
+  bottom: var(--space-4);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border-default);
+  background: var(--color-bg-surface-raised);
+  box-shadow: var(--shadow-lg);
+}
+
+// ── Call table cells ──
+.numberCell {
+  display: flex;
+  flex-direction: column;
+}
+
+.outcomeCell {
+  max-width: 340px;
+  @include mixins.line-clamp(2);
+  color: var(--color-text-secondary);
+}
+
+.starButton {
+  @include mixins.button-reset;
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 1;
+  color: var(--color-text-disabled);
+  padding: var(--space-1);
+
+  &:focus-visible {
+    @include mixins.focus-ring;
+  }
+}
+
+.starOn {
+  color: var(--color-warning-500);
+}
+
+.badgeRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+}
+
+.pager {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: var(--space-4);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+.progress {
+  height: 8px;
+  border-radius: var(--radius-full);
+  background: var(--color-bg-hover);
+  overflow: hidden;
+  margin-top: var(--space-3);
+}
+
+.progressFill {
+  height: 100%;
+  background: var(--color-success-500);
+}
+
+.statRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-5);
+  margin-top: var(--space-3);
+  font-size: var(--font-size-sm);
+}
+
+.statValue {
+  font-weight: var(--font-weight-semibold);
+  font-variant-numeric: tabular-nums;
+}
+
+.callout {
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  background: var(--color-info-50);
+  color: var(--color-text-primary);
+  font-size: var(--font-size-sm);
+  line-height: 1.5;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .callout {
+    background: var(--color-bg-hover);
+  }
+}
+
+:root[data-theme="dark"] .callout {
+  background: var(--color-bg-hover);
+}
+
+@media (max-width: 900px) {
+  .twoCol {
+    grid-template-columns: 1fr;
+  }
+
+  .breakdownRow {
+    grid-template-columns: 110px 1fr 30px;
+  }
+}
+
+// ── Provider picker ──
+.providerGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: var(--space-3);
+}
+
+.providerCard {
+  @include mixins.button-reset;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  text-align: left;
+  padding: var(--space-4);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border-default);
+  background: var(--color-bg-surface);
+  cursor: pointer;
+  @include mixins.transition(border-color box-shadow);
+
+  &:hover {
+    border-color: var(--color-border-strong);
+    box-shadow: var(--shadow-sm);
+  }
+
+  &:focus-visible {
+    @include mixins.focus-ring;
+  }
+}
+
+.providerChosen {
+  border-color: var(--color-brand-500);
+  box-shadow: 0 0 0 1px var(--color-brand-500);
+}
+
+.providerSoon {
+  background: var(--color-bg-surface-sunken);
+}
+
+.providerHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.providerName {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+}
+
+.providerSummary {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  line-height: 1.5;
+}
+
+.providerFact {
+  font-size: var(--font-size-xs);
+  line-height: 1.5;
+
+  span {
+    display: block;
+    color: var(--color-text-tertiary);
+  }
+}
+
+.providerDetail {
+  margin-top: var(--space-5);
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--color-border-subtle);
+}
+
+.bullets {
+  margin: 0;
+  padding-left: var(--space-4);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+}
+
+.url {
+  display: block;
+  margin-top: var(--space-1);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+  word-break: break-all;
+}
+
+.errorBox {
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-danger-400);
+  background: var(--color-danger-50);
+  color: var(--color-danger-600);
+  font-size: var(--font-size-sm);
+  line-height: 1.5;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .errorBox {
+    background: transparent;
+    color: var(--color-danger-400);
+  }
+}
+
+:root[data-theme="dark"] .errorBox {
+  background: transparent;
+  color: var(--color-danger-400);
+}
+
+// A tooltip on the first or last bars would spill out of the card.
+.barSlot:nth-child(-n + 3) .tooltip {
+  left: 0;
+  transform: none;
+}
+
+.barSlot:nth-last-child(-n + 3) .tooltip {
+  left: auto;
+  right: 0;
+  transform: none;
+}
+
+.linkButton {
+  @include mixins.button-reset;
+  color: var(--color-text-link);
+  cursor: pointer;
+  font-size: var(--font-size-sm);
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  &:focus-visible {
+    @include mixins.focus-ring;
+  }
+}
+
+// ── Getting started: one slim track ──
+$ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+
+.track {
+  padding: var(--space-4) var(--space-5) var(--space-5);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-lg);
+  background: var(--color-bg-surface);
+}
+
+.trackHead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.trackKicker {
+  color: var(--color-text-tertiary);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.trackCount {
+  color: var(--color-text-tertiary);
+  font-size: var(--font-size-xs);
+
+  strong {
+    color: var(--color-text-primary);
+    font-size: var(--font-size-sm);
+  }
+}
+
+// Six equal columns; the line runs between the centres of the first and
+// last icon, and its filled part stretches to --reach (0 to 1) of that.
+.trackRail {
+  --dot: 40px;
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  margin: var(--space-4) 0 0;
+  padding: 0;
+  list-style: none;
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    top: calc(var(--dot) / 2 - 1px);
+    left: calc(100% / 12);
+    height: 2px;
+    border-radius: 1px;
+  }
+
+  &::before {
+    right: calc(100% / 12);
+    background: var(--color-border-subtle);
+  }
+
+  &::after {
+    width: calc(100% * 10 / 12 * var(--reach, 0));
+    background: var(--gradient-brand);
+    transition: width 0.6s $ease;
+  }
+
+  li {
+    display: flex;
+    justify-content: center;
+    min-width: 0;
+  }
+}
+
+.trackNode {
+  @include mixins.button-reset;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  max-width: 100%;
+  cursor: pointer;
+
+  &:hover .trackDot {
+    transform: translateY(-2px);
+  }
+
+  &:focus-visible .trackDot {
+    outline: 2px solid var(--color-brand-500);
+    outline-offset: 3px;
+  }
+}
+
+.trackDot {
+  @include mixins.flex-center;
+  position: relative;
+  width: var(--dot);
+  height: var(--dot);
+  border: 1.5px solid var(--color-border-default);
+  border-radius: 50%;
+  background: var(--color-bg-surface);
+  color: var(--color-text-secondary);
+  transition: transform 0.25s $ease, background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
+
+  [data-state="done"] > & {
+    border-color: transparent;
+    // The tint is see-through in dark mode: lay it over the surface colour
+    // so the line behind the icon doesn't show through.
+    background: linear-gradient(var(--color-success-50), var(--color-success-50)), var(--color-bg-surface);
+    color: var(--color-success-600);
+  }
+
+  [data-state="current"] > & {
+    border-color: transparent;
+    background: var(--gradient-brand);
+    color: #fff;
+
+    // A soft ring that breathes, so the next step catches the eye.
+    &::after {
+      content: "";
+      position: absolute;
+      inset: -5px;
+      border: 1.5px solid var(--color-brand-500);
+      border-radius: 50%;
+      animation: breathe 2.4s ease-in-out infinite;
+    }
+  }
+
+  [data-state="locked"] > & {
+    border-style: dashed;
+    color: var(--color-text-tertiary);
+  }
+
+  [data-active] > & {
+    box-shadow: 0 6px 16px -6px color-mix(in srgb, var(--color-brand-500) 60%, transparent);
+  }
+}
+
+.trackLabel {
+  overflow: hidden;
+  max-width: 100%;
+  color: var(--color-text-tertiary);
+  font-size: var(--font-size-xs);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  transition: color 0.2s ease;
+
+  [data-active] > & {
+    color: var(--color-text-primary);
+    font-weight: var(--font-weight-semibold);
+  }
+}
+
+.trackDetail {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-3) var(--space-5);
+  margin-top: var(--space-4);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-surface-sunken);
+  animation: rise 0.28s $ease;
+}
+
+.trackText {
+  flex: 1;
+  min-width: 220px;
+}
+
+.trackTitle {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+}
+
+.trackStepNo {
+  color: var(--color-brand-600);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.trackHint {
+  margin-top: 2px;
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+  line-height: 1.5;
+}
+
+.trackActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.trackDone {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  color: var(--color-success-600);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+// A tick that draws itself.
+.drawn {
+  stroke-dasharray: 16;
+  stroke-dashoffset: 16;
+  animation: draw 0.45s $ease 0.1s forwards;
+}
+
+@keyframes draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+}
+
+@keyframes breathe {
+  0%,
+  100% {
+    opacity: 0.55;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0;
+    transform: scale(1.18);
+  }
+}
+
+@media (max-width: 640px) {
+  .trackRail {
+    --dot: 34px;
+  }
+
+  // Too narrow for six labels: keep only the one in focus.
+  .trackLabel {
+    display: none;
+
+    [data-active] > & {
+      display: block;
+      overflow: visible;
+      max-width: none;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .trackDot,
+  .trackDot::after,
+  .trackDetail,
+  .trackRail::after,
+  .drawn {
+    animation: none;
+    transition: none;
+  }
+
+  .drawn {
+    stroke-dashoffset: 0;
+  }
+}
+
+// ── Phone number wizard: one decision per screen ──
+.wizard {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.wizardRail {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  color: var(--color-text-tertiary);
+  font-size: var(--font-size-sm);
+
+  li {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    white-space: nowrap;
+  }
+
+  // The line joining one step to the next.
+  li + li::before {
+    content: "";
+    width: clamp(12px, 5vw, 56px);
+    height: 2px;
+    border-radius: 1px;
+    background: var(--color-border-default);
+  }
+
+  li[data-state="current"] {
+    color: var(--color-text-primary);
+    font-weight: var(--font-weight-semibold);
+  }
+
+  li[data-state="done"] {
+    color: var(--color-text-secondary);
+  }
+
+  li[data-state="done"]::before,
+  li[data-state="current"]::before {
+    background: var(--color-brand-500);
+  }
+}
+
+.wizardDot {
+  @include mixins.flex-center;
+  width: 26px;
+  height: 26px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--color-bg-hover);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+
+  [data-state="current"] > & {
+    background: var(--gradient-brand);
+    color: #fff;
+  }
+
+  [data-state="done"] > & {
+    background: var(--color-success-500);
+    color: #fff;
+  }
+}
+
+.wizardPanel {
+  padding: var(--space-6);
+}
+
+.wizardTitle {
+  margin: 0;
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: var(--letter-spacing-tight);
+}
+
+.wizardLead {
+  margin: var(--space-2) 0 var(--space-5);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+  line-height: 1.6;
+
+  a {
+    color: var(--color-text-link);
+  }
+}
+
+.wizardForm {
+  display: grid;
+  gap: var(--space-4);
+  max-width: 460px;
+}
+
+.wizardFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin-top: var(--space-5);
+}
+
+.wizardSuccess {
+  @include mixins.flex-center;
+  width: 44px;
+  height: 44px;
+  margin-bottom: var(--space-3);
+  border-radius: 50%;
+  background: var(--color-success-500);
+  color: #fff;
+  font-size: var(--font-size-xl);
+}
+
+.segmented {
+  display: inline-flex;
+  padding: 3px;
+  margin-bottom: var(--space-4);
+  border-radius: var(--radius-full);
+  background: var(--color-bg-hover);
+
+  button {
+    @include mixins.button-reset;
+    padding: var(--space-2) var(--space-4);
+    border-radius: var(--radius-full);
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-sm);
+    cursor: pointer;
+
+    &[data-active] {
+      background: var(--color-bg-surface);
+      box-shadow: var(--shadow-sm);
+      color: var(--color-text-primary);
+      font-weight: var(--font-weight-semibold);
+    }
+  }
+}
+
+.choiceList {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.choice {
+  @include mixins.button-reset;
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  width: 100%;
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-md);
+  text-align: left;
+  cursor: pointer;
+
+  &:hover {
+    border-color: var(--color-brand-500);
+  }
+}
+
+.choiceOn {
+  border-color: var(--color-brand-500);
+  background: var(--color-bg-selected);
+
+  .choiceRadio {
+    border-color: var(--color-brand-500);
+
+    &::after {
+      content: "";
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--color-brand-500);
+    }
+  }
+}
+
+.choiceRadio {
+  @include mixins.flex-center;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  margin-top: 2px;
+  border: 2px solid var(--color-border-strong);
+  border-radius: 50%;
+}
+
+.choiceBody {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+
+.choiceName {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+}
+
+.choiceNote {
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-xs);
+  line-height: 1.5;
+}
+
+.numberLine {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+}
+
+// ── Voice picker ──
+.voicePicker {
+  display: grid;
+  gap: var(--space-3);
+
+  &[aria-disabled] {
+    opacity: 0.6;
+    pointer-events: none;
+  }
+}
+
+.voiceToolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.voiceTier {
+  margin-bottom: var(--space-2);
+  color: var(--color-text-tertiary);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.voiceGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(176px, 1fr));
+  gap: var(--space-2);
+}
+
+.voiceCard,
+.voiceRow {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-surface);
+  transition: border-color 0.2s ease, background-color 0.2s ease, transform 0.2s ease;
+
+  &:hover {
+    border-color: var(--color-brand-500);
+  }
+
+  &[data-selected] {
+    border-color: var(--color-brand-500);
+    background: var(--color-bg-selected);
+  }
+}
+
+.voiceRow,
+.voicePick {
+  @include mixins.button-reset;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-width: 0;
+  padding: var(--space-2) var(--space-3);
+  text-align: left;
+  cursor: pointer;
+}
+
+.voiceRow {
+  width: 100%;
+  border: 1px solid var(--color-border-default);
+}
+
+.voicePick {
+  flex: 1;
+}
+
+.voiceCheck {
+  @include mixins.flex-center;
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  border: 1.5px solid var(--color-border-strong);
+  border-radius: 50%;
+  color: #fff;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+
+  [data-selected] & {
+    border-color: transparent;
+    background: var(--gradient-brand);
+  }
+}
+
+// The name is what people choose by, so it never truncates; the detail gives way first.
+.voiceName {
+  flex-shrink: 0;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  white-space: nowrap;
+}
+
+.voiceMeta {
+  overflow: hidden;
+  color: var(--color-text-tertiary);
+  font-size: var(--font-size-xs);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.voiceListen {
+  @include mixins.button-reset;
+  @include mixins.flex-center;
+  width: 30px;
+  height: 30px;
+  flex-shrink: 0;
+  margin-right: var(--space-2);
+  border-radius: 50%;
+  background: var(--color-bg-hover);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+
+  &:hover {
+    background: var(--gradient-brand);
+    color: #fff;
+    transform: scale(1.06);
+  }
+}
+
+.voiceNote,
+.voiceEmpty {
+  margin: 0;
+  padding: var(--space-3);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-surface-sunken);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+  line-height: 1.5;
+}
+
+// The Voice & testing page styles every <button> inside it (border, padding,
+// background). These restate the picker's own look with enough weight to win.
+.voicePicker {
+  .voicePick {
+    padding: var(--space-2) var(--space-3);
+    border: 0;
+    border-radius: 0;
+    background: none;
+  }
+
+  .voiceRow {
+    padding: var(--space-2) var(--space-3);
+    border: 1px solid var(--color-border-default);
+    border-radius: var(--radius-md);
+    background: var(--color-bg-surface);
+
+    &[data-selected] {
+      border-color: var(--color-brand-500);
+      background: var(--color-bg-selected);
+    }
+  }
+
+  .voiceListen {
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: var(--color-bg-hover);
+
+    &:hover {
+      background: var(--gradient-brand);
+    }
+  }
+
+  .segmented button {
+    padding: var(--space-1) var(--space-3);
+    border: 0;
+    border-radius: var(--radius-full);
+    background: none;
+    font-size: var(--font-size-xs);
+
+    &[data-active] {
+      background: var(--color-bg-surface);
+    }
+  }
+}

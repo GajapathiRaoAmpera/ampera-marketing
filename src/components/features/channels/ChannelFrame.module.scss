@@ -1,0 +1,88 @@
+.steps {
+  display: grid;
+  gap: var(--space-3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  li {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-3);
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-sm);
+    line-height: 1.5;
+  }
+
+  strong {
+    color: var(--color-text-primary);
+    font-weight: var(--font-weight-semibold);
+  }
+
+  a {
+    color: var(--color-text-link);
+  }
+}
+
+.stepNumber {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--color-bg-selected);
+  color: var(--color-text-primary);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+}
+
+.copyField {
+  display: grid;
+  gap: var(--space-1);
+}
+
+.copyLabel {
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-xs);
+}
+
+.copyRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-hover);
+
+  code {
+    flex: 1;
+    min-width: 0;
+    font-size: var(--font-size-xs);
+    overflow-wrap: anywhere;
+  }
+}
+
+.checkList {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: var(--space-2);
+
+  label {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-2) var(--space-3);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-md);
+    font-size: var(--font-size-sm);
+    cursor: pointer;
+  }
+}
+
+.footerRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}

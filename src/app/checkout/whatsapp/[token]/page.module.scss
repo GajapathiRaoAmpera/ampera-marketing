@@ -1,0 +1,18 @@
+.page { min-height: 100vh; padding: 32px 18px; display: flex; flex-direction: column; align-items: center; color: #172033; background: radial-gradient(circle at top, #ddfff1, #f6f8fb 45%); }.brand { width: min(480px, 100%); display: flex; align-items: center; gap: 10px; margin-bottom: 22px; }.brand span { width: 38px; height: 38px; display: grid; place-items: center; border-radius: 12px; color: white; background: linear-gradient(145deg, #22c989, #087d59); font-weight: 800; }.brand strong { font-size: 20px; }.page section { width: min(480px, 100%); padding: 28px; border: 1px solid #e2e8f0; border-radius: 20px; background: white; box-shadow: 0 22px 60px rgba(15,23,42,.1); }.heading { display: flex; justify-content: space-between; align-items: flex-start; gap: 20px; }.heading span { color: #0a9f69; font-size: 12px; font-weight: 700; text-transform: uppercase; }.heading h1 { margin-top: 5px; font-size: 25px; }.heading > strong { font-size: 22px; white-space: nowrap; }.items { margin-top: 26px; padding: 16px 0; border-top: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; }.items div, .total { display: flex; justify-content: space-between; gap: 18px; margin: 8px 0; font-size: 14px; }.items span { color: #64748b; }.total { margin: 20px 0; font-size: 18px; }.page button { width: 100%; min-height: 50px; border: 0; border-radius: 12px; color: white; background: linear-gradient(135deg, #13b978, #087d59); font-size: 15px; font-weight: 700; cursor: pointer; }.page button:disabled { opacity: .65; }.page small { display: block; margin-top: 14px; color: #64748b; font-size: 11px; line-height: 1.5; text-align: center; }.error { padding: 14px; border-radius: 10px; color: #991b1b; background: #fef2f2; }.success { padding: 24px 0; text-align: center; }.success span { width: 54px; height: 54px; display: grid; place-items: center; margin: 0 auto 16px; border-radius: 50%; color: white; background: #10b981; font-size: 27px; }.success p { margin-top: 9px; color: #64748b; }
+
+.payButton { display: flex; align-items: center; justify-content: center; width: 100%; min-height: 52px; border-radius: 12px; color: white; background: linear-gradient(135deg, #13b978, #087d59); font-size: 16px; font-weight: 700; text-decoration: none; }
+.qr { display: grid; justify-items: center; gap: 8px; margin-top: 18px; padding: 16px; border: 1px dashed #cbd5e1; border-radius: 14px; }
+.qr img { border-radius: 8px; image-rendering: pixelated; }
+.qr span { font-size: 12px; color: #64748b; text-align: center; }
+.upiId { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 14px; padding: 10px 12px; border-radius: 10px; background: #f1f5f9; font-size: 13px; overflow-wrap: anywhere; }
+.page .copy { width: auto; min-height: 32px; padding: 0 14px; border-radius: 8px; background: #0f172a; font-size: 12px; flex-shrink: 0; }
+.claim { display: grid; gap: 8px; margin-top: 20px; padding-top: 18px; border-top: 1px solid #e2e8f0; }
+.claim label { font-size: 13px; font-weight: 600; color: #334155; }
+.claim input { height: 46px; padding: 0 14px; border: 1px solid #cbd5e1; border-radius: 10px; font: inherit; font-size: 16px; }
+.claim input:focus { outline: none; border-color: #10b981; box-shadow: 0 0 0 3px rgba(16, 185, 129, .2); }
+.page .error { margin-top: 12px; }
+
+// This page has its own light design; keep it light even when the phone is in dark mode.
+.page { color-scheme: light; }
+.page h1 { color: #172033; }
+.claim input { background: #fff; color: #172033; }

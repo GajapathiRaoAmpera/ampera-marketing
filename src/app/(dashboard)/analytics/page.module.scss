@@ -1,0 +1,67 @@
+@use "@/styles/breakpoints";
+
+.header {
+  margin-bottom: var(--space-6);
+}
+
+.title {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: var(--letter-spacing-tight);
+  margin-bottom: var(--space-1);
+}
+
+.subtitle {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+.tabsRow {
+  margin-bottom: var(--space-6);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+
+  @include breakpoints.from(breakpoints.$bp-sm) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include breakpoints.from(breakpoints.$bp-md) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.snapshotNote {
+  margin-top: var(--space-6);
+  padding: var(--space-3) var(--space-4);
+  background: var(--color-info-50);
+  color: var(--color-info-600);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-xs);
+}
+
+.intentsList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  margin-top: var(--space-5);
+}
+
+.intentRow {
+  display: flex;
+  justify-content: space-between;
+  padding: var(--space-2) 0;
+  border-bottom: 1px solid var(--color-border-subtle);
+  font-size: var(--font-size-sm);
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.intentCount {
+  color: var(--color-text-tertiary);
+}

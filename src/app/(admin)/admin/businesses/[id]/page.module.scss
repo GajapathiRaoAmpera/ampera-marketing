@@ -1,0 +1,48 @@
+@use "@/styles/breakpoints";
+
+.grid {
+  display: grid;
+  gap: var(--space-5);
+  margin: 0;
+
+  @include breakpoints.from(breakpoints.$bp-md) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  dt {
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-sm);
+  }
+
+  dd {
+    margin: 4px 0 0;
+    font-weight: var(--font-weight-medium);
+    overflow-wrap: anywhere;
+  }
+}
+
+.link {
+  color: var(--color-brand-700);
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.sub {
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-regular);
+}
+
+.mono {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-sm);
+}
+
+.copy {
+  margin: 0 0 var(--space-4);
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-normal);
+}

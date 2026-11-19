@@ -1,0 +1,42 @@
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-4);
+  margin-bottom: var(--space-4);
+}
+
+.title {
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
+  margin-bottom: var(--space-1);
+}
+
+.subtitle {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-tertiary);
+  max-width: 480px;
+}
+
+.manageLink {
+  flex-shrink: 0;
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-brand-600);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.manageLink:hover {
+  text-decoration: underline;
+}
+
+.flowName {
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-primary);
+}
+
+.muted {
+  color: var(--color-text-tertiary);
+  font-size: var(--font-size-xs);
+}

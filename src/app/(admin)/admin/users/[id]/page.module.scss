@@ -1,0 +1,191 @@
+@use "@/styles/breakpoints";
+
+.pills {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2) var(--space-3);
+  margin: calc(var(--space-2) * -1) 0 var(--space-5);
+}
+
+.joined {
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+}
+
+.tabs {
+  margin-bottom: var(--space-5);
+  overflow-x: auto;
+}
+
+// --- Settings rows --------------------------------------------------------------
+
+.settings {
+  margin: calc(var(--space-5) * -1);
+  padding: 0;
+  list-style: none;
+
+  @include breakpoints.until(breakpoints.$bp-md) {
+    margin: calc(var(--space-4) * -1);
+  }
+}
+
+.setting {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--space-5);
+
+  & + & {
+    border-top: 1px solid var(--color-border-subtle);
+  }
+
+  @include breakpoints.from(breakpoints.$bp-lg) {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-6);
+  }
+
+  @include breakpoints.until(breakpoints.$bp-md) {
+    padding: var(--space-4);
+  }
+}
+
+.settingText {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.settingLabel {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+  font-weight: var(--font-weight-semibold);
+}
+
+.locked {
+  padding: 1px 8px;
+  border-radius: var(--radius-full);
+  background: var(--color-bg-active);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+}
+
+.settingDesc {
+  margin-top: 2px;
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-normal);
+}
+
+.settingSource {
+  margin-top: 4px;
+  color: var(--color-text-tertiary);
+  font-size: var(--font-size-xs);
+}
+
+.settingMeter {
+  margin-top: var(--space-3);
+  max-width: 420px;
+}
+
+.settingControl {
+  flex: none;
+
+  @include breakpoints.from(breakpoints.$bp-lg) {
+    display: flex;
+    justify-content: flex-start;
+    width: 380px;
+  }
+}
+
+.speedIntro {
+  margin: 0 0 var(--space-5);
+  max-width: 70ch;
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-normal);
+}
+
+// --- Overview facts -------------------------------------------------------------
+
+.facts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-4);
+  margin: 0;
+
+  dt {
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-sm);
+  }
+
+  dd {
+    margin: 2px 0 0;
+    font-weight: var(--font-weight-semibold);
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+.planText {
+  margin: 0 0 var(--space-4);
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-normal);
+}
+
+.planChange {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--space-3);
+  margin-bottom: var(--space-3);
+
+  > :first-child {
+    flex: 1;
+  }
+}
+
+.modalCopy {
+  margin: 0 0 var(--space-4);
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-normal);
+}
+
+// --- Businesses ------------------------------------------------------------------
+
+.businesses {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.businessRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2) var(--space-4);
+  min-height: 56px;
+  padding: var(--space-3) var(--space-5);
+  color: inherit;
+  text-decoration: none;
+
+  li + li & {
+    border-top: 1px solid var(--color-border-subtle);
+  }
+
+  &:hover {
+    background: var(--color-bg-hover);
+  }
+}
+
+.businessName {
+  flex: 1 1 200px;
+  font-weight: var(--font-weight-semibold);
+  overflow-wrap: anywhere;
+}
+
+.businessDate {
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+}

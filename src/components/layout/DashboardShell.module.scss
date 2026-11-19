@@ -1,0 +1,73 @@
+@use "@/styles/mixins";
+@use "@/styles/breakpoints";
+
+.main {
+  position: relative;
+  height: 100dvh;
+  min-height: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+
+  @include breakpoints.from(breakpoints.$bp-lg) {
+    padding-left: var(--sidebar-width);
+    // Same duration+easing as Sidebar.module.scss's own width transition
+    // (both default to --duration-base + --ease-out via the shared mixin) -
+    // kept identical deliberately so the rail and the content it pushes
+    // move in the same visual beat instead of two independently-timed
+    // transitions drifting apart, which reads as jank on its own even when
+    // each individual transition is smooth.
+    @include mixins.transition($props: padding-left, $duration: var(--duration-base));
+
+    &.mainCollapsed {
+      padding-left: var(--sidebar-width-collapsed);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    transition-duration: 1ms !important;
+  }
+}
+
+.content {
+  // The full-width pane is what scrolls, so its scrollbar sits at the window
+  // edge. (When this box itself was capped and centred, the scrollbar floated
+  // in the middle of wide screens.) The width cap lives on .inner instead.
+  // Positioned so it is the containing block for any absolutely positioned
+  // descendant (hidden file inputs, popovers): they scroll and clip with the
+  // page content instead of stretching the document behind the shell.
+  position: relative;
+  flex: 1;
+  min-height: 0; // let this flex child shrink below its content's natural height so it, not the page, is what scrolls
+  overflow-y: auto;
+  overflow-x: hidden;
+  width: 100%;
+  padding: var(--space-4);
+
+  @include breakpoints.from(breakpoints.$bp-md) {
+    padding: var(--space-6);
+  }
+
+  @include breakpoints.from(breakpoints.$bp-lg) {
+    padding: var(--space-8);
+  }
+}
+
+.inner {
+  max-width: var(--content-max-width);
+  margin: 0 auto;
+  min-width: 0;
+  @include mixins.transition($props: max-width, $duration: var(--duration-base));
+
+  // With the rail collapsed there is more room: use it, rather than leaving
+  // wide empty gutters on both sides.
+  .mainCollapsed & {
+    max-width: calc(var(--content-max-width) + 160px);
+  }
+}
+
+// Pages that fill the screen exactly (the inbox: its lists scroll inside it)
+// mark their root data-layout="fill", so the wrapper passes the full height on.
+.inner:has([data-layout="fill"]) {
+  height: 100%;
+}

@@ -1,0 +1,120 @@
+@use "@/styles/breakpoints";
+
+.banner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin: var(--space-3) var(--space-4) 0;
+  padding: var(--space-4);
+  border: 1px solid;
+  border-radius: var(--radius-lg);
+
+  @include breakpoints.from(breakpoints.$bp-md) {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-6);
+    margin: var(--space-4) var(--space-6) 0;
+    padding: var(--space-4) var(--space-5);
+  }
+
+  @include breakpoints.from(breakpoints.$bp-lg) {
+    margin: var(--space-4) var(--space-8) 0;
+  }
+}
+
+.pending {
+  border-color: var(--color-warning-300);
+  background: var(--color-warning-50);
+}
+
+.trial {
+  border-color: var(--color-border-subtle);
+  background: var(--color-bg-surface-sunken);
+}
+
+.clock {
+  font-variant-numeric: tabular-nums;
+}
+
+.near {
+  border-color: var(--color-warning-200);
+  background: var(--color-warning-50);
+}
+
+.full {
+  border-color: var(--color-danger-400);
+  background: var(--color-danger-50);
+}
+
+.text {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.title {
+  font-weight: var(--font-weight-semibold);
+}
+
+.body {
+  margin-top: 2px;
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-normal);
+}
+
+.meters {
+  display: grid;
+  gap: var(--space-3);
+  flex: none;
+  width: 100%;
+
+  @include breakpoints.from(breakpoints.$bp-md) {
+    width: 280px;
+  }
+}
+
+.meterTop {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-2);
+  margin-bottom: 4px;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+}
+
+.meterValue {
+  color: var(--color-text-secondary);
+  font-weight: var(--font-weight-regular);
+  font-variant-numeric: tabular-nums;
+}
+
+.track {
+  height: 8px;
+  border-radius: var(--radius-full);
+  background: var(--color-bg-active);
+  overflow: hidden;
+}
+
+.fill {
+  height: 100%;
+  border-radius: inherit;
+  background: var(--color-brand-500);
+}
+
+.fillFull {
+  background: var(--color-danger-500);
+}
+
+.action {
+  flex: none;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  padding: 0 var(--space-4);
+  border-radius: var(--radius-md);
+  background: var(--color-brand-600);
+  color: var(--color-brand-contrast);
+  font-weight: var(--font-weight-semibold);
+  text-decoration: none;
+}

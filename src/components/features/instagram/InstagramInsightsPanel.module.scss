@@ -1,0 +1,265 @@
+// Chart-specific color slots: the dataviz skill's validated reference
+// palette, scoped to .vizRoot only. The rest of the page uses the app's
+// normal --color-* tokens; only these SVG-adjacent bar fills need a
+// checked sequential ramp, which the app's brand gold doesn't pass.
+.vizRoot {
+  --viz-surface: var(--color-bg-surface);
+  --viz-text-secondary: var(--color-text-secondary);
+  --viz-sequential-400: #3987e5;
+  --viz-sequential-450: #2a78d6;
+  --viz-sequential-500: #256abf;
+  --viz-sequential-600: #184f95;
+}
+
+// The reference sequential ramp's dark-mode steps are identical to light
+// here (its light steps already clear >=3:1 on a dark surface for this
+// hue), so no separate dark override block is needed.
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: var(--space-4);
+  margin-bottom: var(--space-4);
+}
+
+.statGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: var(--space-3);
+  margin-bottom: var(--space-5);
+}
+
+.statTile {
+  display: grid;
+  gap: var(--space-1);
+  min-width: 0;
+}
+
+.statLabel {
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-xs);
+}
+
+.statValue {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  font-variant-numeric: proportional-nums;
+}
+
+.chartCard {
+  display: grid;
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+}
+
+.cardTitle {
+  margin: 0;
+  font-size: var(--font-size-lg);
+}
+
+.cardHint {
+  margin: calc(var(--space-2) * -1) 0 0;
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+}
+
+.hint {
+  margin: 0;
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+}
+
+.errorText {
+  margin: 0;
+  color: var(--color-danger-600);
+}
+
+.chartEmpty {
+  margin: 0;
+  padding: var(--space-4) 0;
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+  text-align: center;
+}
+
+// ── Bar chart ──
+
+.barList {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.barRow {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(120px, 180px) 1fr auto;
+  align-items: center;
+  gap: var(--space-3);
+  padding: 2px 0;
+  border-radius: var(--radius-sm);
+
+  &:focus-visible {
+    outline: 2px solid var(--color-border-focus);
+    outline-offset: 2px;
+  }
+}
+
+.barLabel {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+.barTrack {
+  position: relative;
+  height: 20px;
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-hover);
+  overflow: hidden;
+}
+
+.barFill {
+  height: 100%;
+  min-width: 4px;
+  border-radius: 4px 0 0 4px;
+  background: var(--viz-sequential-450);
+  transition: width 0.25s ease, background-color 0.15s ease;
+
+  &[data-hovered] {
+    background: var(--viz-sequential-500);
+  }
+}
+
+.barValue {
+  min-width: 44px;
+  text-align: right;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-primary);
+  font-variant-numeric: tabular-nums;
+}
+
+.tooltip {
+  position: absolute;
+  top: -2px;
+  left: 50%;
+  transform: translate(-50%, -100%);
+  display: grid;
+  gap: 2px;
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-sm);
+  background: var(--color-text-primary);
+  color: var(--color-text-inverse);
+  font-size: var(--font-size-xs);
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 1;
+  box-shadow: var(--shadow-md);
+
+  strong {
+    font-size: var(--font-size-sm);
+  }
+}
+
+// ── Media grid ──
+
+.mediaGrid {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.mediaBlock {
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.mediaRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  width: 100%;
+  padding: var(--space-3);
+  border: none;
+  background: var(--color-bg-surface);
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  min-width: 0;
+
+  &:hover {
+    background: var(--color-bg-hover);
+  }
+}
+
+.mediaThumb {
+  flex-shrink: 0;
+  border-radius: var(--radius-sm);
+  object-fit: cover;
+  width: 48px;
+  height: 48px;
+}
+
+.mediaThumbFallback {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-hover);
+}
+
+.mediaMeta {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+  flex: 1;
+}
+
+.mediaCaption {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: var(--font-size-sm);
+
+  em {
+    color: var(--color-text-tertiary);
+    font-style: italic;
+  }
+}
+
+.mediaSub {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--color-text-tertiary);
+  font-size: var(--font-size-xs);
+}
+
+.mediaQuickStat {
+  flex-shrink: 0;
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-xs);
+  font-variant-numeric: tabular-nums;
+}
+
+.mediaDetail {
+  padding: var(--space-3);
+  border-top: 1px solid var(--color-border-subtle);
+  background: var(--color-bg-surface-sunken);
+}
+
+@media (max-width: 640px) {
+  .barRow {
+    grid-template-columns: 1fr;
+    gap: var(--space-1);
+  }
+
+  .barValue {
+    text-align: left;
+  }
+}

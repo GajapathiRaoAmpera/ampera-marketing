@@ -1,0 +1,68 @@
+@use "@/styles/breakpoints";
+
+.headerText {
+  flex: 1;
+  min-width: 0;
+}
+
+.createButton {
+  flex-shrink: 0;
+  align-self: center;
+}
+
+.statsRow {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-3);
+  margin-bottom: var(--space-5);
+
+  @include breakpoints.from(breakpoints.$bp-md) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.statCard {
+  text-align: center;
+}
+
+.statValue {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+
+  &[data-tone="success"] {
+    color: var(--color-success-600);
+  }
+  &[data-tone="warning"] {
+    color: var(--color-warning-600);
+  }
+  &[data-tone="danger"] {
+    color: var(--color-danger-600);
+  }
+}
+
+.statLabel {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-tertiary);
+  margin-top: 2px;
+}
+
+.connectionWarning {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-2);
+  background: var(--color-warning-50);
+  border: 1px solid var(--color-warning-200, var(--color-warning-100));
+  margin-bottom: var(--space-5);
+}
+
+.connectionWarningTitle {
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-sm);
+}
+
+.connectionWarningBody {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+}

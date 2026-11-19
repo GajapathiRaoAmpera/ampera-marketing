@@ -1,0 +1,105 @@
+@use "@/styles/mixins";
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  width: 100%;
+}
+
+.label {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-secondary);
+}
+
+.required {
+  color: var(--color-danger-500);
+  margin-left: var(--space-1);
+}
+
+.inputWrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input {
+  @include mixins.transition(border-color box-shadow background-color);
+
+  width: 100%;
+  height: 40px;
+  padding: 0 var(--space-3);
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-md);
+  color: var(--color-text-primary);
+  font-size: var(--font-size-sm);
+
+  &::placeholder {
+    color: var(--color-text-tertiary);
+  }
+
+  &:hover:not(:disabled):not(:focus) {
+    border-color: var(--color-border-strong);
+  }
+
+  &:focus {
+    outline: none;
+    border-color: var(--color-border-focus);
+    box-shadow: 0 0 0 3px var(--color-brand-100);
+  }
+
+  &:disabled {
+    background: var(--color-bg-surface-sunken);
+    color: var(--color-text-disabled);
+    cursor: not-allowed;
+  }
+}
+
+.hasLeftIcon {
+  padding-left: var(--space-9, 2.25rem);
+}
+
+.hasRightSlot {
+  padding-right: var(--space-9, 2.25rem);
+}
+
+.leftIcon {
+  position: absolute;
+  left: var(--space-3);
+  color: var(--color-text-tertiary);
+  display: flex;
+  pointer-events: none;
+}
+
+.rightSlot {
+  position: absolute;
+  right: var(--space-2);
+  display: flex;
+  align-items: center;
+}
+
+.error {
+  border-color: var(--color-danger-400) !important;
+
+  &:focus {
+    box-shadow: 0 0 0 3px var(--color-danger-50) !important;
+  }
+}
+
+.helperText {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-tertiary);
+}
+
+.errorText {
+  font-size: var(--font-size-xs);
+  color: var(--color-danger-500);
+}
+
+@media (pointer: coarse) {
+  .input {
+    height: 44px;
+  }
+}

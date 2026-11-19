@@ -1,0 +1,43 @@
+@use "@/styles/mixins";
+
+.card {
+  @include mixins.surface-card;
+  padding: var(--space-6);
+}
+
+.interactive {
+  @include mixins.transition(box-shadow border-color transform);
+  cursor: pointer;
+
+  &:hover {
+    box-shadow: var(--shadow-md);
+    border-color: var(--color-border-strong);
+    transform: translateY(-1px);
+  }
+}
+
+.padSm {
+  padding: var(--space-4);
+}
+
+.padNone {
+  padding: 0;
+}
+
+.header {
+  @include mixins.flex-between;
+  margin-bottom: var(--space-4);
+  gap: var(--space-3);
+}
+
+.title {
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+}
+
+.subtitle {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-tertiary);
+  margin-top: var(--space-1);
+}

@@ -1,0 +1,65 @@
+@use "@/styles/breakpoints";
+@use "@/styles/mixins";
+
+.page { display: flex; flex-direction: column; gap: var(--space-5); padding-bottom: 92px; }
+.header { display: flex; align-items: center; gap: var(--space-4); }
+.header > div:nth-child(2) { flex: 1; }
+.header h1 { font-size: var(--font-size-2xl); }
+.header p { margin-top: 2px; color: var(--color-text-secondary); font-size: var(--font-size-sm); }
+.eyebrow { color: var(--color-brand-600); font-size: var(--font-size-2xs); font-weight: var(--font-weight-semibold); letter-spacing: var(--letter-spacing-wide); text-transform: uppercase; }
+.headingIcon, .cardIcon { @include mixins.flex-center; flex-shrink: 0; color: var(--color-brand-600); background: var(--color-brand-50); }
+.headingIcon { width: 48px; height: 48px; border-radius: var(--radius-lg); }
+.cardIcon { width: 40px; height: 40px; border-radius: var(--radius-md); }
+.websiteCard { background: var(--gradient-brand-soft); border-color: var(--color-brand-300); }
+.cardHeading { display: flex; align-items: flex-start; gap: var(--space-3); margin-bottom: var(--space-5); }
+.cardHeading h2 { font-size: var(--font-size-md); }
+.cardHeading p { margin-top: 3px; color: var(--color-text-secondary); font-size: var(--font-size-xs); line-height: var(--line-height-relaxed); }
+.websiteRow { display: grid; grid-template-columns: 1fr auto auto; align-items: end; gap: var(--space-3); }
+.extraSites { display: flex; flex-direction: column; gap: var(--space-2); margin-top: var(--space-4); }
+.extraSiteRow { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: var(--space-3); }
+.extraSiteActions { display: flex; align-items: center; gap: var(--space-3); }
+.sourcesModal { display: flex; flex-direction: column; gap: var(--space-4); }
+.sourceDetail { display: flex; flex-direction: column; gap: var(--space-3); }
+.sourceDetailHeader { display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); }
+.sourceDetailHeader a { min-width: 0; overflow-wrap: anywhere; color: var(--color-text-secondary); font-size: var(--font-size-xs); }
+.scanSummary { display: flex; align-items: center; flex-wrap: wrap; gap: var(--space-2) var(--space-4); margin-top: var(--space-4); padding: var(--space-3); border-radius: var(--radius-md); background: color-mix(in srgb, var(--color-success-50) 70%, transparent); color: var(--color-text-secondary); font-size: var(--font-size-xs); }
+.scanSummary strong { color: var(--color-success-600); }
+.readyDot { width: 7px; height: 7px; border-radius: 50%; background: var(--color-success-500); box-shadow: 0 0 0 4px var(--color-success-50); }
+.twoColumn { display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(320px, 0.75fr); align-items: start; gap: var(--space-5); }
+.twoColumn:has(> :only-child) { grid-template-columns: 1fr; }
+.mainColumn, .sourceColumn { display: flex; flex-direction: column; gap: var(--space-5); }
+.sourceColumn { position: sticky; top: calc(var(--topbar-height) + var(--space-5)); }
+.fieldGrid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-4); margin-bottom: var(--space-4); }
+.fieldGrid > :first-child { grid-column: 1 / -1; }
+.faqList { display: flex; flex-direction: column; gap: var(--space-3); margin-bottom: var(--space-4); }
+.faqRow { display: grid; grid-template-columns: minmax(160px, 0.8fr) minmax(220px, 1.2fr) auto; align-items: start; gap: var(--space-3); padding-bottom: var(--space-3); border-bottom: 1px solid var(--color-border-subtle); }
+.pageList { margin-top: var(--space-4); font-size: var(--font-size-xs); }
+.pageList summary { cursor: pointer; color: var(--color-text-secondary); font-weight: var(--font-weight-semibold); }
+.pageList a { display: flex; justify-content: space-between; gap: var(--space-3); padding: var(--space-2) 0; border-bottom: 1px solid var(--color-border-subtle); color: var(--color-text-secondary); overflow-wrap: anywhere; }
+.pageList a span { flex-shrink: 0; color: var(--color-text-tertiary); }
+.pageList a .pageAddress { min-width: 0; flex: 1; color: var(--color-text-secondary); }
+.pageAddress small { display: block; margin-top: 2px; color: var(--color-text-tertiary); font-size: var(--font-size-2xs); }
+.emptySource { @include mixins.flex-center; min-height: 280px; flex-direction: column; gap: var(--space-2); border: 1px dashed var(--color-border-default); border-radius: var(--radius-lg); color: var(--color-text-tertiary); text-align: center; }
+.emptySource strong { color: var(--color-text-primary); }
+.emptySource span { max-width: 240px; font-size: var(--font-size-xs); }
+.products { display: flex; flex-direction: column; gap: var(--space-3); }
+.products label { display: flex; align-items: flex-start; gap: var(--space-3); font-size: var(--font-size-sm); cursor: pointer; }
+.products strong, .products small { display: block; }
+.products small { margin-top: 2px; color: var(--color-text-tertiary); }
+.saveBar { position: fixed; z-index: calc(var(--z-sticky) - 1); right: var(--space-6); bottom: var(--space-5); left: calc(var(--sidebar-width) + var(--space-6)); display: flex; align-items: center; justify-content: space-between; gap: var(--space-5); max-width: calc(var(--content-max-width) - (var(--space-8) * 2)); margin: 0 auto; padding: var(--space-3) var(--space-4); border: 1px solid var(--color-border-default); border-radius: var(--radius-lg); background: color-mix(in srgb, var(--color-bg-surface-raised) 92%, transparent); box-shadow: var(--shadow-lg); backdrop-filter: blur(16px); }
+.saveBar strong, .saveBar span { display: block; }
+.saveBar span { color: var(--color-text-tertiary); font-size: var(--font-size-xs); }
+
+@include breakpoints.until(breakpoints.$bp-lg) {
+  .twoColumn { grid-template-columns: 1fr; }
+  .sourceColumn { position: static; }
+  .saveBar { left: var(--space-5); right: var(--space-5); }
+}
+
+@include breakpoints.until(breakpoints.$bp-md) {
+  .header { align-items: flex-start; flex-wrap: wrap; }
+  .header > :last-child { margin-left: 64px; }
+  .websiteRow, .fieldGrid, .faqRow, .extraSiteRow { grid-template-columns: 1fr; }
+  .fieldGrid > :first-child { grid-column: auto; }
+  .saveBar { align-items: stretch; flex-direction: column; }
+}

@@ -1,0 +1,147 @@
+@use "@/styles/breakpoints";
+
+.tabs {
+  max-width: 100%;
+  margin-bottom: var(--space-3);
+  overflow-x: auto;
+}
+
+.blurb {
+  margin: 0 0 var(--space-5);
+  max-width: 70ch;
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-normal);
+}
+
+// --- Editable rows ---------------------------------------------------------------
+
+.rows {
+  margin: calc(var(--space-5) * -1);
+  padding: 0;
+  list-style: none;
+
+  @include breakpoints.until(breakpoints.$bp-md) {
+    margin: calc(var(--space-4) * -1);
+  }
+}
+
+.row {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--space-5);
+
+  & + & {
+    border-top: 1px solid var(--color-border-subtle);
+  }
+
+  @include breakpoints.from(breakpoints.$bp-lg) {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-6);
+  }
+
+  @include breakpoints.until(breakpoints.$bp-md) {
+    padding: var(--space-4);
+  }
+}
+
+.rowText {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.rowLabel {
+  font-weight: var(--font-weight-semibold);
+}
+
+.rowDesc {
+  margin-top: 2px;
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-normal);
+}
+
+.rowSource {
+  margin-top: 4px;
+  color: var(--color-text-tertiary);
+  font-size: var(--font-size-xs);
+}
+
+.rowControl {
+  flex: none;
+
+  @include breakpoints.from(breakpoints.$bp-lg) {
+    display: flex;
+    justify-content: flex-start;
+    width: 380px;
+  }
+}
+
+// --- Compare table ---------------------------------------------------------------
+
+.compareWrap {
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-lg);
+  background: var(--color-bg-surface);
+  overflow-x: auto;
+}
+
+.compare {
+  width: 100%;
+  min-width: 640px;
+  border-collapse: collapse;
+  font-size: var(--font-size-sm);
+
+  th,
+  td {
+    padding: var(--space-3) var(--space-4);
+    text-align: left;
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+  }
+
+  thead th {
+    border-bottom: 1px solid var(--color-border-subtle);
+    background: var(--color-bg-surface-sunken);
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-semibold);
+    letter-spacing: var(--letter-spacing-wide);
+    text-transform: uppercase;
+  }
+
+  tbody th[scope="row"] {
+    position: sticky;
+    left: 0;
+    background: var(--color-bg-surface);
+    font-weight: var(--font-weight-medium);
+    white-space: normal;
+    min-width: 200px;
+  }
+
+  tbody tr + tr th,
+  tbody tr + tr td {
+    border-top: 1px solid var(--color-border-subtle);
+  }
+}
+
+.groupRow th {
+  padding-top: var(--space-4);
+  background: var(--color-bg-surface-sunken);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--letter-spacing-wide);
+  text-transform: uppercase;
+}
+
+.custom {
+  color: var(--color-text-primary);
+  font-weight: var(--font-weight-bold);
+}
+
+.inherited {
+  color: var(--color-text-tertiary);
+}

@@ -1,0 +1,35 @@
+@use "@/styles/mixins";
+
+.wrap {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.labelRow {
+  @include mixins.flex-between;
+  font-size: var(--font-size-xs);
+}
+
+.label {
+  color: var(--color-text-secondary);
+}
+
+.value {
+  color: var(--color-text-primary);
+  font-weight: var(--font-weight-semibold);
+}
+
+.track {
+  height: 8px;
+  border-radius: var(--radius-full);
+  background: var(--color-bg-hover);
+  overflow: hidden;
+}
+
+.fill {
+  height: 100%;
+  border-radius: var(--radius-full);
+  background: var(--gradient-brand);
+  @include mixins.transition($props: width, $duration: var(--duration-slow));
+}

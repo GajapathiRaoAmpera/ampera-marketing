@@ -1,0 +1,269 @@
+@use "@/styles/mixins";
+@use "@/styles/breakpoints";
+
+.header {
+  @include mixins.flex-between;
+  margin-bottom: var(--space-6);
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+.title {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: var(--letter-spacing-tight);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.subtitle {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+.filterRow {
+  display: flex;
+  gap: var(--space-2);
+  margin-bottom: var(--space-4);
+}
+
+.filterChip {
+  @include mixins.button-reset;
+  @include mixins.transition(background-color border-color color);
+
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  border: 1px solid var(--color-border-default);
+  background: var(--color-bg-surface);
+  color: var(--color-text-secondary);
+
+  &:hover {
+    border-color: var(--color-border-strong);
+  }
+}
+
+.filterChipActive {
+  background: var(--color-brand-500);
+  border-color: var(--color-brand-500);
+  color: white;
+
+  &:hover {
+    border-color: var(--color-brand-500);
+  }
+}
+
+.tabPanel {
+  margin-top: var(--space-5);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+
+  @include breakpoints.from(breakpoints.$bp-md) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include breakpoints.from(breakpoints.$bp-xl) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.leadCard {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.leadTop {
+  @include mixins.flex-between;
+}
+
+.leadName {
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
+}
+
+.leadPhone {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-tertiary);
+}
+
+.scoreRing {
+  @include mixins.flex-center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+  color: white;
+  flex-shrink: 0;
+}
+
+.scoreHot {
+  background: linear-gradient(135deg, var(--color-warning-400), var(--color-danger-500));
+}
+
+.scoreVeryHot {
+  background: linear-gradient(135deg, var(--color-danger-400), var(--color-danger-600));
+}
+
+.leadSignal {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+}
+
+.leadNote {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-tertiary);
+  font-style: italic;
+  @include mixins.truncate;
+}
+
+// Follow-ups tab
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.topRow {
+  @include mixins.flex-between;
+}
+
+.customerName {
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
+}
+
+.reason {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-tertiary);
+}
+
+.draftBox {
+  background: var(--color-bg-surface-sunken);
+  border-radius: var(--radius-md);
+  padding: var(--space-3) var(--space-4);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-primary);
+  line-height: var(--line-height-relaxed);
+  border: 1px solid var(--color-border-subtle);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  justify-content: flex-end;
+}
+
+.copyHint {
+  font-size: var(--font-size-2xs);
+  color: var(--color-text-tertiary);
+}
+
+// Lead detail modal (LeadTimelineModal): Details / Messages / Score timeline
+// tabs. The tab strip itself uses the shared Tabs component's own styles;
+// this is just the content area below it.
+.tabPanelInModal {
+  margin-top: var(--space-4);
+}
+
+.tagsUnavailable {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-tertiary);
+}
+
+.messagesPanel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.messagesPanelSkeleton {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+
+  > *:nth-child(2) {
+    align-self: flex-end;
+  }
+}
+
+.messagesPanelMore {
+  align-self: center;
+  font-size: var(--font-size-2xs);
+  color: var(--color-text-tertiary);
+  margin-top: var(--space-2);
+}
+
+// Timeline
+.timeline {
+  display: flex;
+  flex-direction: column;
+}
+
+.timelineItem {
+  display: flex;
+  gap: var(--space-4);
+  padding-bottom: var(--space-5);
+  position: relative;
+
+  &:not(:last-child)::before {
+    content: "";
+    position: absolute;
+    left: 5px;
+    top: 16px;
+    bottom: 0;
+    width: 2px;
+    background: var(--color-border-subtle);
+  }
+}
+
+.timelineDot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--color-brand-500);
+  margin-top: 4px;
+  flex-shrink: 0;
+}
+
+.timelineBody {
+  flex: 1;
+}
+
+.timelineSignal {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-primary);
+}
+
+.timelineMeta {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-tertiary);
+  margin-top: 2px;
+}
+
+.timelineDelta {
+  font-weight: var(--font-weight-semibold);
+}
+
+.deltaPositive {
+  color: var(--color-success-600);
+}
+
+.deltaNegative {
+  color: var(--color-danger-500);
+}

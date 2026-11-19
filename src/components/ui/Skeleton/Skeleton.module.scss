@@ -1,0 +1,15 @@
+@use "@/styles/mixins";
+
+.skeleton {
+  @include mixins.skeleton-shimmer;
+  border-radius: var(--radius-md);
+}
+
+.text {
+  height: 0.9em;
+  border-radius: var(--radius-sm);
+}
+
+.circle {
+  border-radius: 50%;
+}

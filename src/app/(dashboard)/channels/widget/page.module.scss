@@ -1,0 +1,115 @@
+@use "@/styles/breakpoints";
+
+.section {
+  // Card already provides padding/border - this class exists for spacing hooks.
+}
+
+.sectionTitle {
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
+  margin-bottom: var(--space-4);
+}
+
+.fieldGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+
+  @include breakpoints.from(breakpoints.$bp-md) {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.colorField {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.colorLabel {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-secondary);
+}
+
+.colorRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.colorSwatch {
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  background: none;
+
+  &::-webkit-color-swatch-wrapper {
+    padding: 2px;
+  }
+  &::-webkit-color-swatch {
+    border-radius: var(--radius-sm);
+    border: none;
+  }
+}
+
+.footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: var(--space-5);
+}
+
+.helperText {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-4);
+
+  code {
+    background: var(--color-bg-surface-sunken);
+    padding: 2px 6px;
+    border-radius: var(--radius-sm);
+    font-size: var(--font-size-xs);
+  }
+}
+
+.codeBlock {
+  background: var(--color-bg-surface-sunken);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  font-family: var(--font-family-mono, monospace);
+  font-size: var(--font-size-xs);
+  line-height: var(--line-height-relaxed);
+  overflow-x: auto;
+  white-space: pre;
+  color: var(--color-text-primary);
+}
+
+
+// Settings on the left, the live widget on the right. On wide screens the
+// preview stays in view while the settings scroll past it.
+.layout {
+  display: grid;
+  gap: var(--space-5);
+
+  @include breakpoints.from(breakpoints.$bp-xl) {
+    grid-template-columns: minmax(0, 1fr) minmax(400px, 460px);
+    align-items: start;
+  }
+}
+
+.settings {
+  min-width: 0;
+}
+
+.preview {
+  min-width: 0;
+
+  @include breakpoints.from(breakpoints.$bp-xl) {
+    position: sticky;
+    top: var(--space-4);
+  }
+}

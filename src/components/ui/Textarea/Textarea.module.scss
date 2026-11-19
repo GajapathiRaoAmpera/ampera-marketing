@@ -1,0 +1,60 @@
+@use "@/styles/mixins";
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  width: 100%;
+}
+
+.label {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-secondary);
+}
+
+.textarea {
+  @include mixins.transition(border-color box-shadow);
+
+  width: 100%;
+  min-height: 96px;
+  padding: var(--space-3);
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-md);
+  color: var(--color-text-primary);
+  font-size: var(--font-size-sm);
+  font-family: inherit;
+  resize: vertical;
+
+  &::placeholder {
+    color: var(--color-text-tertiary);
+  }
+
+  &:hover:not(:disabled):not(:focus) {
+    border-color: var(--color-border-strong);
+  }
+
+  &:focus {
+    outline: none;
+    border-color: var(--color-border-focus);
+    box-shadow: 0 0 0 3px var(--color-brand-100);
+  }
+
+  &:disabled {
+    background: var(--color-bg-surface-sunken);
+    color: var(--color-text-disabled);
+    cursor: not-allowed;
+  }
+}
+
+.helperText {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-tertiary);
+}
+
+.charCount {
+  align-self: flex-end;
+  font-size: var(--font-size-2xs);
+  color: var(--color-text-tertiary);
+}

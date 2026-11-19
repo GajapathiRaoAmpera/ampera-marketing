@@ -1,0 +1,38 @@
+// ==========================================================================
+// Typography tokens
+// ==========================================================================
+
+:root {
+  --font-sans: var(--font-switzer), "Switzer", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: var(--font-jetbrains), "JetBrains Mono", "SF Mono", Menlo, Consolas, monospace;
+  --font-family-mono: var(--font-mono);
+
+  // Type scale - 1.25 ratio (major third), 16px base
+  --font-size-2xs: 0.6875rem; // 11px
+  --font-size-xs: 0.75rem; // 12px
+  --font-size-sm: 0.8125rem; // 13px
+  --font-size-base: 0.9375rem; // 15px
+  --font-size-md: 1rem; // 16px
+  --font-size-lg: 1.125rem; // 18px
+  --font-size-xl: 1.375rem; // 22px
+  --font-size-2xl: 1.75rem; // 28px
+  --font-size-3xl: 2.25rem; // 36px
+  --font-size-4xl: 2.75rem; // 44px
+
+  --line-height-tight: 1.2;
+  --line-height-snug: 1.35;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.65;
+
+  --font-weight-regular: 400;
+  --font-weight-normal: 400; // alias of regular, used by a few pages
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  --letter-spacing-tight: -0.02em;
+  --letter-spacing-normal: 0;
+  --letter-spacing-wide: 0.02em;
+  --letter-spacing-wider: 0.06em;
+}

@@ -1,0 +1,10 @@
+.nameCell {
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-sm);
+}
+
+.actionsCell {
+  display: flex;
+  gap: var(--space-1);
+  justify-content: flex-end;
+}

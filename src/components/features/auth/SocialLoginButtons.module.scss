@@ -1,0 +1,66 @@
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+// 40px is Google's own fixed height for renderButton's size:"large" - every
+// other pill in this stack (Facebook's .facebookButton below) is set to
+// match it exactly, since Google's iframe can't be resized to match ours.
+$social-button-height: 40px;
+
+.googleButtonWrap {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: $social-button-height;
+  overflow: hidden;
+}
+
+.googleButton {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  // Google's rendered iframe button doesn't stretch to its container by
+  // default, force it, since every other social/auth button here is fullWidth.
+  > div,
+  iframe {
+    width: 100% !important;
+    height: 100% !important;
+  }
+}
+
+.facebookButton {
+  height: $social-button-height !important;
+}
+
+.googleButtonPlaceholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-tertiary);
+  background: var(--color-bg-surface);
+}
+
+.googleButtonOverlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-secondary);
+  background: var(--color-bg-surface);
+  opacity: 0.9;
+}

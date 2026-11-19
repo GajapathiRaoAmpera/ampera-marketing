@@ -1,0 +1,35 @@
+@use "@/styles/mixins";
+
+.wrap {
+  @include mixins.flex-center;
+  flex-direction: column;
+  text-align: center;
+  padding: var(--space-12) var(--space-6);
+  gap: var(--space-4);
+}
+
+.iconWrap {
+  @include mixins.flex-center;
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-xl);
+  background: var(--gradient-brand-soft);
+  color: var(--color-brand-500);
+}
+
+.title {
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+}
+
+.description {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  max-width: 360px;
+  line-height: var(--line-height-relaxed);
+}
+
+.action {
+  margin-top: var(--space-2);
+}

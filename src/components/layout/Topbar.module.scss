@@ -1,0 +1,140 @@
+@use "@/styles/mixins";
+@use "@/styles/breakpoints";
+
+.topbar {
+  position: sticky;
+  top: 0;
+  height: var(--topbar-height);
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: 0 var(--space-6);
+  background: var(--color-bg-surface);
+  border-bottom: 1px solid var(--color-border-subtle);
+  // Slightly above the sidebar's --z-sticky so the topbar reliably paints on
+  // top at scroll/viewport boundaries instead of relying on DOM paint order.
+  z-index: calc(var(--z-sticky) + 1);
+}
+
+.menuButton {
+  @include mixins.button-reset;
+  @include mixins.flex-center;
+
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-md);
+  color: var(--color-text-secondary);
+
+  &:hover {
+    background: var(--color-bg-hover);
+  }
+
+  @include breakpoints.from(breakpoints.$bp-lg) {
+    display: none;
+  }
+}
+
+.switcher {
+  position: relative;
+}
+
+.switcherButton {
+  @include mixins.button-reset;
+  @include mixins.transition(background-color border-color);
+  @include mixins.flex-center;
+
+  gap: var(--space-2);
+  height: 40px;
+  padding: 0 var(--space-3);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border-default);
+  background: var(--color-bg-surface);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-primary);
+  max-width: 260px;
+
+  &:hover {
+    background: var(--color-bg-hover);
+  }
+}
+
+.switcherLabel {
+  @include mixins.truncate;
+}
+
+.switcherIcon {
+  color: var(--color-text-tertiary);
+  flex-shrink: 0;
+}
+
+.dropdown {
+  @include mixins.surface-card(var(--radius-lg));
+
+  position: absolute;
+  top: calc(100% + var(--space-2));
+  left: 0;
+  min-width: 260px;
+  box-shadow: var(--shadow-lg);
+  z-index: var(--z-dropdown);
+  padding: var(--space-2);
+  animation: pop var(--duration-base) var(--ease-out);
+}
+
+.dropdownItem {
+  @include mixins.button-reset;
+  @include mixins.transition(background-color);
+
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  width: 100%;
+  text-align: left;
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-primary);
+  text-decoration: none;
+
+  span {
+    @include mixins.truncate;
+  }
+
+  &:hover {
+    background: var(--color-bg-hover);
+    text-decoration: none;
+  }
+}
+
+.dropdownItemActive {
+  background: var(--color-bg-selected);
+  color: var(--color-brand-600);
+  font-weight: var(--font-weight-medium);
+}
+
+.dropdownDivider {
+  height: 1px;
+  background: var(--color-border-subtle);
+  margin: var(--space-2) 0;
+}
+
+.spacer {
+  flex: 1;
+}
+
+.pageTitle {
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+}
+
+@keyframes pop {
+  from {
+    opacity: 0;
+    transform: translateY(-4px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}

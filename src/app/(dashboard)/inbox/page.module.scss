@@ -1,0 +1,777 @@
+@use "@/styles/mixins";
+@use "@/styles/breakpoints";
+
+.shell {
+  display: grid;
+  grid-template-columns: 1fr;
+  // Fills exactly whatever height DashboardShell's .content leaves available
+  // (that's the real scroll container now, see components/layout/DashboardShell.module.scss)
+  // instead of recomputing it here from topbar/padding constants, which
+  // drifts out of sync whenever either side changes and causes the whole
+  // page to scroll instead of just this pane's internal lists.
+  height: 100%;
+  min-height: 0;
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--color-bg-surface);
+
+  @include breakpoints.from(breakpoints.$bp-lg) {
+    grid-template-columns: 340px 1fr;
+  }
+}
+
+.listPane {
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid var(--color-border-subtle);
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+
+  @include breakpoints.until(breakpoints.$bp-lg) {
+    &.hiddenOnMobile {
+      display: none;
+    }
+  }
+}
+
+.listHeader {
+  padding: var(--space-4);
+  border-bottom: 1px solid var(--color-border-subtle);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  flex-shrink: 0;
+}
+
+.listTitleRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.listTitle {
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
+}
+
+.listCount {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 22px;
+  height: 22px;
+  padding: 0 var(--space-2);
+  border-radius: var(--radius-full);
+  background: var(--gradient-brand);
+  color: white;
+  font-size: var(--font-size-2xs);
+  font-weight: var(--font-weight-semibold);
+}
+
+.filterRow {
+  display: flex;
+  gap: var(--space-2);
+  overflow-x: auto;
+}
+
+.dropdownRow {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.filterChip {
+  @include mixins.button-reset;
+  @include mixins.transition(background-color color);
+
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  background: var(--color-bg-hover);
+  color: var(--color-text-secondary);
+  white-space: nowrap;
+
+  &:hover {
+    background: var(--color-bg-active);
+  }
+}
+
+.filterChipActive {
+  background: var(--color-brand-500);
+  color: white;
+
+  &:hover {
+    background: var(--color-brand-600);
+  }
+}
+
+.list {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  @include mixins.custom-scrollbar;
+}
+
+.pagination {
+  position: sticky;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  border-top: 1px solid var(--color-border-subtle);
+  background: color-mix(in srgb, var(--color-bg-surface) 94%, transparent);
+  backdrop-filter: blur(8px);
+
+  span {
+    color: var(--color-text-tertiary);
+    font-size: var(--font-size-2xs);
+    font-weight: var(--font-weight-medium);
+  }
+
+  button {
+    @include mixins.button-reset;
+    padding: var(--space-1) var(--space-2);
+    border-radius: var(--radius-sm);
+    color: var(--color-brand-600);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
+
+    &:hover:not(:disabled) { background: var(--color-bg-hover); }
+    &:disabled { color: var(--color-text-disabled); cursor: not-allowed; }
+  }
+}
+
+.conversationItem {
+  @include mixins.button-reset;
+  @include mixins.transition(background-color);
+
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  width: 100%;
+  text-align: left;
+  padding: var(--space-3) var(--space-4);
+  border-bottom: 1px solid var(--color-border-subtle);
+
+  &:hover {
+    background: var(--color-bg-hover);
+  }
+}
+
+.conversationItemActive {
+  background: var(--color-bg-selected);
+}
+
+// Briefly flashes when a conversation receives new activity from polling,
+// so a reorder-to-top doesn't just silently happen - the row visibly says
+// "this is why I moved".
+.conversationItemFlash {
+  animation: conversationFlash 1.6s ease-out;
+}
+
+@keyframes conversationFlash {
+  0% {
+    background: var(--color-brand-100);
+  }
+  100% {
+    background: transparent;
+  }
+}
+
+.avatarWrap {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.channelDot {
+  position: absolute;
+  bottom: -2px;
+  right: -2px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  border: 2px solid var(--color-bg-surface);
+
+  svg {
+    width: 10px;
+    height: 10px;
+  }
+}
+
+.conversationBody {
+  flex: 1;
+  min-width: 0;
+}
+
+.conversationTopRow {
+  @include mixins.flex-between;
+  gap: var(--space-2);
+}
+
+.conversationName {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-primary);
+  @include mixins.truncate;
+}
+
+.conversationTime {
+  font-size: var(--font-size-2xs);
+  color: var(--color-text-tertiary);
+  flex-shrink: 0;
+}
+
+.conversationPreview {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-tertiary);
+  @include mixins.line-clamp(1);
+  margin-top: 2px;
+}
+
+.conversationMeta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: var(--space-2);
+  flex-wrap: wrap;
+  min-width: 0;
+}
+
+.detailPane {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.detailHeader {
+  @include mixins.flex-between;
+  padding: var(--space-4);
+  border-bottom: 1px solid var(--color-border-subtle);
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  flex-shrink: 0;
+}
+
+.detailHeaderInfo {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.backButton {
+  @include mixins.button-reset;
+  @include mixins.flex-center;
+
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-md);
+  color: var(--color-text-secondary);
+
+  &:hover {
+    background: var(--color-bg-hover);
+  }
+
+  @include breakpoints.from(breakpoints.$bp-lg) {
+    display: none;
+  }
+}
+
+.detailName {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+}
+
+.detailPhone {
+  font-size: var(--font-size-2xs);
+  color: var(--color-text-tertiary);
+}
+
+.detailMetaRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: 2px;
+}
+
+.detailAgent {
+  font-size: var(--font-size-2xs);
+  color: var(--color-text-tertiary);
+
+  &:not(:last-child)::after {
+    content: "·";
+    margin-left: var(--space-2);
+    color: var(--color-border-strong);
+  }
+}
+
+.detailChannelBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: var(--font-size-2xs);
+  font-weight: var(--font-weight-medium);
+}
+
+.detailActions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.aiToggleLabel {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-secondary);
+}
+
+.messageList {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  @include mixins.custom-scrollbar;
+}
+
+.loadingOlder {
+  align-self: center;
+  color: var(--color-text-tertiary);
+  font-size: var(--font-size-xs);
+}
+
+.messageSkeletonGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-2) 0;
+
+  > *:nth-child(2) {
+    align-self: flex-end;
+  }
+}
+
+.emptyMessages {
+  align-self: center;
+  color: var(--color-text-tertiary);
+  font-size: var(--font-size-sm);
+  margin: auto 0;
+}
+
+.dateDivider {
+  align-self: center;
+  background: var(--color-bg-surface-sunken);
+  color: var(--color-text-tertiary);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-full);
+  margin: var(--space-2) 0;
+}
+
+.messageRow {
+  display: flex;
+  flex-direction: column;
+  max-width: 70%;
+  animation: messageIn 0.2s ease-out;
+}
+
+@keyframes messageIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Optimistic message: shown instantly on send, before the server round-trip
+// confirms it. Lower opacity signals "sending" without blocking the composer
+// or making the user wait to see their own message appear.
+.messageRowPending {
+  opacity: 0.6;
+}
+
+.messageRowIncoming {
+  align-self: flex-start;
+  align-items: flex-start;
+}
+
+.messageRowOutgoing {
+  align-self: flex-end;
+  align-items: flex-end;
+}
+
+.bubble {
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-lg);
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-normal);
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.bubbleIncoming {
+  background: var(--color-bg-surface-sunken);
+  color: var(--color-text-primary);
+  border: 1px solid var(--color-border-subtle);
+}
+
+.bubbleOutgoing {
+  background: var(--gradient-brand);
+  color: white;
+}
+
+.bubbleHuman {
+  background: var(--color-info-50);
+  color: var(--color-text-primary);
+  border: 1px solid var(--color-info-400);
+}
+
+.messageMeta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: var(--space-1);
+  font-size: var(--font-size-2xs);
+  color: var(--color-text-tertiary);
+}
+
+.messageImage,
+.messageMedia {
+  display: block;
+  width: min(360px, 100%);
+  max-height: 320px;
+  object-fit: contain;
+  border-radius: var(--radius-md);
+  margin-bottom: var(--space-2);
+}
+
+.messageAudio {
+  display: block;
+  width: min(320px, 100%);
+  margin-bottom: var(--space-2);
+}
+
+.voiceNoteLabel {
+  font-size: var(--font-size-2xs);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-tertiary);
+  margin-bottom: var(--space-1);
+}
+
+.transcript {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-md);
+  background: var(--color-info-50);
+  border: 1px solid var(--color-info-400);
+  color: var(--color-text-primary);
+}
+
+.transcriptLabel {
+  font-size: var(--font-size-2xs);
+  font-weight: var(--font-weight-semibold);
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  color: var(--color-text-tertiary);
+}
+
+.transcriptUnavailable {
+  font-size: var(--font-size-xs);
+  font-style: italic;
+  color: var(--color-text-tertiary);
+}
+
+.documentLink {
+  display: block;
+  color: inherit;
+  font-weight: var(--font-weight-semibold);
+  text-decoration: underline;
+  margin-bottom: var(--space-2);
+}
+
+.feedbackButtons {
+  display: flex;
+  gap: var(--space-1);
+}
+
+.feedbackButton {
+  @include mixins.button-reset;
+  @include mixins.flex-center;
+  @include mixins.transition(background-color color);
+
+  width: 22px;
+  height: 22px;
+  border-radius: var(--radius-sm);
+  color: var(--color-text-tertiary);
+
+  &:hover {
+    background: var(--color-bg-hover);
+    color: var(--color-text-primary);
+  }
+}
+
+.feedbackButtonActiveUp {
+  color: var(--color-success-500);
+}
+
+.feedbackButtonActiveDown {
+  color: var(--color-danger-500);
+}
+
+.composer {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  border-top: 1px solid var(--color-border-subtle);
+  flex-shrink: 0;
+}
+
+.hiddenInput {
+  display: none;
+}
+
+.composerIconButton {
+  @include mixins.button-reset;
+  @include mixins.flex-center;
+
+  flex: 0 0 38px;
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border-subtle);
+  color: var(--color-text-secondary);
+
+  &:hover {
+    background: var(--color-bg-hover);
+    color: var(--color-text-primary);
+  }
+}
+
+.recordingButton {
+  color: var(--color-danger-500);
+  border-color: var(--color-danger-500);
+  animation: recordingPulse 1.25s ease-in-out infinite;
+}
+
+@keyframes recordingPulse {
+  50% { opacity: 0.55; }
+}
+
+.attachmentPreview {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-2) var(--space-4);
+  background: var(--color-bg-surface-sunken);
+  border-top: 1px solid var(--color-border-subtle);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+
+  span {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  button {
+    @include mixins.button-reset;
+    color: var(--color-danger-500);
+    font-weight: var(--font-weight-medium);
+  }
+}
+
+.quickReplies {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  overflow-x: auto;
+  padding: var(--space-2) var(--space-4);
+  border-top: 1px solid var(--color-border-subtle);
+  flex-shrink: 0;
+}
+
+.quickReplyGroup {
+  display: inline-flex;
+  flex: 0 0 auto;
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+
+  button {
+    @include mixins.button-reset;
+    padding: var(--space-1) var(--space-2);
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-xs);
+
+    &:hover { background: var(--color-bg-hover); }
+  }
+
+  button:last-child {
+    border-left: 1px solid var(--color-border-subtle);
+    color: var(--color-danger-500);
+  }
+}
+
+.saveQuickReplyButton {
+  @include mixins.button-reset;
+  flex: 0 0 auto;
+  color: var(--color-brand-500);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+}
+
+.quickReplyEditor {
+  display: grid;
+  grid-template-columns: minmax(180px, 1fr) auto;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-4);
+  background: var(--color-bg-surface-sunken);
+  border-top: 1px solid var(--color-border-subtle);
+  flex-shrink: 0;
+}
+
+.productShareBar {
+  display: grid;
+  grid-template-columns: minmax(220px, 1fr) auto;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-4);
+  border-top: 1px solid var(--color-border-subtle);
+  background: var(--color-success-50);
+  flex-shrink: 0;
+}
+
+.accountAiNotice {
+  padding: var(--space-3) var(--space-4);
+  background: var(--color-warning-50);
+  color: var(--color-warning-600);
+  font-size: var(--font-size-sm);
+  border-bottom: 1px solid var(--color-border-subtle);
+  flex-shrink: 0;
+
+  a {
+    color: inherit;
+    font-weight: 600;
+    text-decoration: underline;
+  }
+}
+
+.composerHint {
+  padding: var(--space-3) var(--space-4);
+  background: var(--color-warning-50);
+  color: var(--color-warning-600);
+  font-size: var(--font-size-xs);
+  border-top: 1px solid var(--color-border-subtle);
+  flex-shrink: 0;
+}
+
+.emptyDetail {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: var(--space-8);
+  text-align: center;
+  background: radial-gradient(circle at 50% 30%, var(--color-bg-selected) 0%, transparent 60%);
+}
+
+.emptyIllustration {
+  margin-bottom: var(--space-2);
+}
+
+.emptyDetailTitle {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+}
+
+.emptyDetailDescription {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-tertiary);
+  max-width: 320px;
+}
+
+.emptyDetailChannels {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-2);
+  margin-top: var(--space-5);
+}
+
+.emptyDetailChannel {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-full);
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border-subtle);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-secondary);
+}
+
+.emptyDetailChannelIcon {
+  display: flex;
+  align-items: center;
+}
+
+.detailSubline {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.templateBox {
+  display: grid;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  border-top: 1px solid var(--color-border-subtle);
+}
+
+.templateFields {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: var(--space-3);
+}
+
+.templatePreview {
+  padding: var(--space-3);
+  border-radius: var(--radius-lg);
+  background: #e7fedb;
+  color: #111;
+  font-size: var(--font-size-sm);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.templateEmpty {
+  margin: 0;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}

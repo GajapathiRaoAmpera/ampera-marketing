@@ -1,0 +1,51 @@
+.page{display:grid;gap:24px;max-width:1200px;margin:0 auto}.page header h1{margin:5px 0 8px;font-size:clamp(28px,4vw,42px)}.page header p,.endpoint span,.secret p,.logs p{color:var(--text-secondary)}.eyebrow{color:var(--brand-primary);font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase}.guide{display:grid;gap:8px;padding:18px 20px;border:1px solid var(--border-color);border-radius:14px;background:var(--bg-secondary)}.guide code,.secret code{overflow-wrap:anywhere;color:var(--brand-primary)}.guide span{color:var(--text-secondary);line-height:1.55}.secret{display:grid;grid-template-columns:minmax(180px,1fr) minmax(220px,2fr) auto;align-items:center;gap:18px;border-color:var(--brand-primary)}.secret p{margin:4px 0 0}.columns{display:grid;grid-template-columns:minmax(280px,.8fr) minmax(420px,1.4fr);gap:22px;align-items:start}.columns h2,.logs h2{margin:0 0 18px}.form,.list,.logs{display:grid;gap:14px}.form{gap:18px}.form fieldset{display:grid;gap:10px;padding:0;border:0}.form legend{margin-bottom:10px;font-weight:700}.form label{color:var(--text-secondary)}.list>h2{margin:0}.endpoint{display:grid;gap:16px}.endpointTop,.actions,.metrics,.logHeading,.log{display:flex;align-items:center;gap:10px}.endpointTop,.logHeading,.log{justify-content:space-between}.endpointTop h3{margin:0 0 5px}.endpointTop>div{min-width:0}.endpointTop span{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.metrics,.actions{flex-wrap:wrap}.metrics{color:var(--text-secondary);font-size:13px}.metrics span{padding:5px 9px;border-radius:999px;background:var(--bg-tertiary)}.logHeading h2{margin:0}.log>div{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.log span{color:var(--text-secondary);font-size:13px}@media(max-width:800px){.columns,.secret{grid-template-columns:1fr}.endpointTop{align-items:flex-start}}
+
+/* Integrations Hub tab shell + Connected Apps grid, new additions, kept
+   readable rather than minified to match the rest of this file's density. */
+.tabPanel {
+  display: grid;
+  gap: 22px;
+}
+
+.appsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 16px;
+}
+
+.appCard {
+  display: grid;
+  gap: 10px;
+  align-content: start;
+}
+
+.appCardTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.appCardTop h3 {
+  margin: 0;
+}
+
+.appCardName {
+  color: var(--text-secondary);
+  font-size: 13px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.appCardLink {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--brand-primary);
+}
+
+.appsTotalNote {
+  color: var(--text-secondary);
+  font-size: 13px;
+  text-align: center;
+}

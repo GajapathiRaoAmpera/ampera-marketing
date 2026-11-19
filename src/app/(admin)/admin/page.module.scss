@@ -1,0 +1,197 @@
+@use "@/styles/breakpoints";
+
+.list,
+.compactList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.listRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2) var(--space-4);
+  padding: var(--space-3) var(--space-5);
+
+  & + & {
+    border-top: 1px solid var(--color-border-subtle);
+  }
+
+  @include breakpoints.until(breakpoints.$bp-md) {
+    padding: var(--space-3) var(--space-4);
+  }
+}
+
+.rowLink {
+  flex: 1 1 220px;
+  min-width: 0;
+  color: inherit;
+  text-decoration: none;
+  font-weight: var(--font-weight-medium);
+
+  a {
+    color: inherit;
+  }
+
+  &:hover {
+    color: var(--color-brand-700);
+  }
+}
+
+.rowMeta {
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+}
+
+.compactRow,
+.activityRow {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-2) 0;
+
+  & + & {
+    border-top: 1px solid var(--color-border-subtle);
+  }
+
+  .rowLink {
+    flex: 1 1 auto;
+  }
+}
+
+.activityRow > span:first-child {
+  min-width: 0;
+  font-size: var(--font-size-sm);
+  overflow-wrap: anywhere;
+}
+
+.activityRow .rowMeta {
+  flex: none;
+}
+
+// --- Plans --------------------------------------------------------------------
+
+.plans {
+  display: grid;
+  gap: var(--space-4);
+  margin: 0 0 var(--space-4);
+  padding: 0;
+  list-style: none;
+}
+
+.planTop {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin-bottom: 6px;
+}
+
+.planName {
+  font-weight: var(--font-weight-medium);
+}
+
+.planCount {
+  font-weight: var(--font-weight-bold);
+  font-variant-numeric: tabular-nums;
+}
+
+.planHelp {
+  margin-left: 6px;
+  color: var(--color-text-tertiary);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-regular);
+}
+
+.planTrack {
+  height: 10px;
+  border-radius: var(--radius-full);
+  background: var(--color-bg-active);
+  overflow: hidden;
+}
+
+.planFill {
+  height: 100%;
+  min-width: 2px;
+  border-radius: inherit;
+}
+
+.plan_trial {
+  background: var(--color-warning-500);
+}
+
+.plan_free {
+  background: var(--color-text-tertiary);
+}
+
+.plan_pro {
+  background: var(--color-brand-500);
+}
+
+.plan_enterprise {
+  background: var(--color-info-500);
+}
+
+.inlineLink {
+  color: var(--color-brand-700);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+// --- Big numbers --------------------------------------------------------------
+
+.bigNumbers {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-4);
+}
+
+.bigValue {
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: var(--letter-spacing-tight);
+  line-height: 1.1;
+  font-variant-numeric: tabular-nums;
+}
+
+.bigLabel {
+  margin-top: 4px;
+  font-weight: var(--font-weight-medium);
+}
+
+.bigHint {
+  color: var(--color-text-tertiary);
+  font-size: var(--font-size-xs);
+}
+
+// --- Instagram comments -------------------------------------------------------
+
+.commentTotals {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-6);
+  color: var(--color-text-secondary);
+
+  strong {
+    color: var(--color-text-primary);
+    font-size: var(--font-size-lg);
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+.bad strong {
+  color: var(--color-danger-600);
+}
+
+// The accounts that missed comments sit under the totals, edge to edge.
+.commentTotals + .list {
+  margin: var(--space-4) calc(var(--space-5) * -1) calc(var(--space-5) * -1);
+  border-top: 1px solid var(--color-border-subtle);
+}

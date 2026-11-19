@@ -1,0 +1,149 @@
+@use "@/styles/mixins";
+@use "@/styles/breakpoints";
+
+.header {
+  @include mixins.flex-between;
+  margin-bottom: var(--space-6);
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+.title {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: var(--letter-spacing-tight);
+}
+
+.subtitle {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+.uploadGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+  margin-bottom: var(--space-6);
+
+  @include breakpoints.from(breakpoints.$bp-md) {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.dropzone {
+  @include mixins.transition(border-color background-color);
+  @include mixins.flex-center;
+
+  flex-direction: column;
+  gap: var(--space-3);
+  border: 2px dashed var(--color-border-default);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  text-align: center;
+  cursor: pointer;
+  min-height: 160px;
+}
+
+.dropzoneActive {
+  border-color: var(--color-brand-500);
+  background: var(--color-bg-selected);
+}
+
+.dropzoneIcon {
+  color: var(--color-brand-500);
+}
+
+.dropzoneText {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+.dropzoneHint {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-tertiary);
+}
+
+.urlForm {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  justify-content: center;
+}
+
+.docRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) 0;
+  border-bottom: 1px solid var(--color-border-subtle);
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.docIcon {
+  @include mixins.flex-center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-md);
+  background: var(--color-bg-surface-sunken);
+  color: var(--color-text-secondary);
+  flex-shrink: 0;
+}
+
+.docInfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.docName {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-primary);
+  @include mixins.truncate;
+}
+
+.docMeta {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-tertiary);
+  @include mixins.truncate;
+}
+
+.docActions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex-shrink: 0;
+}
+
+.editLink {
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-sm);
+  color: var(--color-brand-600);
+  background: var(--color-brand-50);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  text-decoration: none;
+
+  &:hover {
+    background: var(--color-brand-100);
+    text-decoration: none;
+  }
+}
+
+.deleteButton {
+  @include mixins.button-reset;
+  @include mixins.flex-center;
+  @include mixins.transition(background-color color);
+
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-md);
+  color: var(--color-text-tertiary);
+
+  &:hover {
+    background: var(--color-danger-50);
+    color: var(--color-danger-500);
+  }
+}

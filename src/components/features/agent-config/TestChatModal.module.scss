@@ -1,0 +1,83 @@
+@use "@/styles/mixins";
+
+.chatBody {
+  display: flex;
+  flex-direction: column;
+  height: 420px;
+}
+
+.controlRow {
+  display: flex;
+  justify-content: flex-end;
+  padding-bottom: var(--space-3);
+}
+
+.disclaimer {
+  padding: var(--space-3) var(--space-4);
+  margin-bottom: var(--space-3);
+  background: var(--color-warning-50);
+  color: var(--color-warning-600);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-xs);
+  line-height: var(--line-height-relaxed);
+}
+
+.messages {
+  flex: 1;
+  overflow-y: auto;
+  @include mixins.custom-scrollbar;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding-bottom: var(--space-3);
+}
+
+.bubbleRow {
+  display: flex;
+  max-width: 80%;
+}
+
+.bubbleRowUser {
+  align-self: flex-end;
+}
+
+.bubbleRowAgent {
+  align-self: flex-start;
+}
+
+.bubble {
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-lg);
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-normal);
+  white-space: pre-wrap;
+}
+
+.bubbleUser {
+  background: var(--gradient-brand);
+  color: white;
+}
+
+.bubbleAgent {
+  background: var(--color-bg-surface-sunken);
+  border: 1px solid var(--color-border-subtle);
+}
+
+.bubbleHuman {
+  background: var(--color-warning-50);
+  border: 1px solid var(--color-warning-500);
+}
+
+.humanLabel {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-warning-600);
+  margin-bottom: var(--space-1);
+}
+
+.inputRow {
+  display: flex;
+  gap: var(--space-2);
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--color-border-subtle);
+}

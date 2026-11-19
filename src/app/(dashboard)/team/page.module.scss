@@ -1,0 +1,125 @@
+@use "@/styles/mixins";
+
+.header {
+  @include mixins.flex-between;
+  margin-bottom: var(--space-6);
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+.title {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: var(--letter-spacing-tight);
+}
+
+.subtitle {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+.memberCell {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.memberName {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+}
+
+.memberEmail {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-tertiary);
+}
+
+.removeButton {
+  @include mixins.button-reset;
+  @include mixins.transition(background-color color);
+  @include mixins.flex-center;
+
+  width: 30px;
+  height: 30px;
+  border-radius: var(--radius-md);
+  color: var(--color-text-tertiary);
+
+  &:hover {
+    background: var(--color-danger-50);
+    color: var(--color-danger-500);
+  }
+}
+
+.addForm {
+  display: flex;
+  gap: var(--space-3);
+  align-items: flex-end;
+  flex-wrap: wrap;
+}
+
+.roleHint {
+  margin-top: var(--space-3);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+}
+
+.guide {
+  margin-top: var(--space-8);
+}
+
+.guideTitle {
+  margin-bottom: var(--space-4);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+}
+
+.guideGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: var(--space-4);
+}
+
+.guideName {
+  font-weight: var(--font-weight-semibold);
+}
+
+.guideSummary {
+  margin: var(--space-1) 0 var(--space-3);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+.guideList {
+  display: grid;
+  gap: var(--space-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: var(--font-size-xs);
+}
+
+.guideCan,
+.guideCannot {
+  position: relative;
+  padding-left: var(--space-5);
+}
+
+.guideCan::before,
+.guideCannot::before {
+  position: absolute;
+  left: 0;
+  font-weight: var(--font-weight-bold);
+}
+
+.guideCan::before {
+  content: "✓";
+  color: var(--color-success-500);
+}
+
+.guideCannot {
+  color: var(--color-text-tertiary);
+}
+
+.guideCannot::before {
+  content: "–";
+}

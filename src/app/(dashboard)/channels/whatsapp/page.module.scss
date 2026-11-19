@@ -1,0 +1,128 @@
+@use "@/styles/mixins";
+@use "@/styles/breakpoints";
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-6);
+  flex-wrap: wrap;
+}
+
+.iconBadge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-lg);
+  background: var(--color-whatsapp);
+  color: white;
+}
+
+.title {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: var(--letter-spacing-tight);
+}
+
+.subtitle {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+.setupCard {
+  margin-top: var(--space-6);
+}
+
+.setupHeading {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--space-4);
+  margin-bottom: var(--space-4);
+
+  h2, p { margin: 0; }
+  p { color: var(--color-text-secondary); font-size: var(--font-size-sm); margin-top: 3px; }
+}
+
+.setupGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-3);
+
+  @include breakpoints.until(breakpoints.$bp-md) {
+    grid-template-columns: 1fr;
+  }
+
+  > div {
+    @include mixins.transition(border-color box-shadow background-color);
+    display: flex;
+    gap: var(--space-3);
+    padding: var(--space-3);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-md);
+
+    &:hover { border-color: var(--color-border-strong); box-shadow: var(--shadow-xs); }
+
+    > span {
+      @include mixins.transition(background-color color);
+      flex: 0 0 26px;
+      height: 26px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: color-mix(in srgb, #f59e0b 15%, transparent);
+      color: var(--color-text-primary);
+      font-size: var(--font-size-xs);
+      font-weight: 700;
+    }
+
+    &[data-ready="true"] {
+      background: color-mix(in srgb, #10b981 5%, transparent);
+
+      > span {
+        background: color-mix(in srgb, #10b981 16%, transparent);
+        color: #10b981;
+      }
+    }
+
+    > div {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+  }
+
+  small, em {
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-xs);
+    font-style: normal;
+  }
+
+  a, button {
+    @include mixins.button-reset;
+    @include mixins.transition(color);
+    width: fit-content;
+    color: var(--color-brand-500);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
+    text-decoration: none;
+    cursor: pointer;
+
+    &:hover { color: var(--color-brand-600); text-decoration: underline; }
+  }
+
+  i {
+    font-size: 10px;
+    color: var(--color-text-tertiary);
+  }
+}
+
+.flowsSection {
+  margin-top: var(--space-6);
+}
+
+@include breakpoints.until(breakpoints.$bp-sm) {
+  .header { align-items: flex-start; flex-direction: column; }
+}
