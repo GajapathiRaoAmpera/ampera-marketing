@@ -1,4 +1,5 @@
 import { BrandLockup } from "@/components/layout/BrandLockup";
+import { LoginScene } from "@/components/features/auth/LoginScene";
 import styles from "./layout.module.scss";
 
 export default function AuthLayout({ children }: { children: React.ReactNode }) {
@@ -14,6 +15,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
       </div>
       <div className={styles.showcaseSide}>
         <div className={styles.showcaseGlow} />
+        <LoginScene />
         <div className={styles.showcaseContent}>
           <div className={styles.showcaseTitle}>WhatsApp, Instagram and Messenger in one AI workspace.</div>
           <p className={styles.showcaseDescription}>

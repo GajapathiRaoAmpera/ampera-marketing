@@ -1,0 +1,87 @@
+// Fills the whole showcase panel behind its text (the panel's content has z-index 1).
+.stage {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.canvas {
+  position: absolute;
+  inset: 0;
+}
+
+// Keeps the panel's headline, copy and stats readable (WCAG contrast) over the moving scene.
+.scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    #050505 0%,
+    rgba(5, 5, 5, 0.9) 30%,
+    rgba(5, 5, 5, 0.55) 45%,
+    rgba(5, 5, 5, 0) 62%
+  );
+}
+
+// Top bar, aligned with the panel's padding.
+.hud {
+  position: absolute;
+  inset: var(--space-10) var(--space-16) auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2) var(--space-3);
+  font-family: var(--font-jetbrains), monospace;
+  font-size: var(--font-size-xs);
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.item {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  box-shadow: 0 0 10px currentColor;
+}
+
+.arrow {
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.toggle {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 50%;
+  background: rgba(5, 5, 5, 0.45);
+  backdrop-filter: blur(6px);
+  color: #fff;
+  cursor: pointer;
+  pointer-events: auto;
+  transition: background-color 0.15s, border-color 0.15s;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.4);
+  }
+
+  &:focus-visible {
+    outline: 2px solid #d98fd7;
+    outline-offset: 3px;
+  }
+}

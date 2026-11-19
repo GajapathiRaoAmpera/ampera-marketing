@@ -38,6 +38,11 @@
     justify-content: center;
     padding: var(--space-16);
   }
+
+  // /login: the 3D scene owns the upper panel, so the copy moves to the bottom.
+  &:has([data-login-scene]) {
+    justify-content: flex-end;
+  }
 }
 
 .showcaseGlow {
@@ -91,4 +96,30 @@
 .statLabel {
   font-size: var(--font-size-xs);
   color: rgba(255, 255, 255, 0.75);
+}
+
+// /login: a soft dotted grid and faint brand glows behind the form card, and room for the card.
+.formSide:has([data-login-form]) {
+  position: relative;
+  isolation: isolate;
+  background:
+    radial-gradient(560px 420px at 0% 0%, rgba(156, 54, 154, 0.1), transparent 70%),
+    radial-gradient(520px 420px at 100% 100%, rgba(0, 15, 92, 0.07), transparent 70%);
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background-image: radial-gradient(
+      color-mix(in srgb, var(--color-text-primary) 14%, transparent) 1px,
+      transparent 1px
+    );
+    background-size: 22px 22px;
+    mask-image: radial-gradient(ellipse 70% 65% at 50% 45%, #000 15%, transparent 75%);
+  }
+}
+
+.formInner:has([data-login-form]) {
+  max-width: 440px;
 }

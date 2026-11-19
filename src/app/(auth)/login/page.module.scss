@@ -78,3 +78,156 @@
   flex-direction: column;
   gap: var(--space-3);
 }
+
+// ---------------------------------------------------------------------------
+// Login only (the classes above are shared with register / forgot / reset).
+// ---------------------------------------------------------------------------
+
+.card {
+  position: relative;
+  padding: var(--space-8);
+  background: var(--color-bg-surface-raised);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-2xl);
+  box-shadow: var(--shadow-xl);
+
+  // Thin brand accent along the top edge.
+  &::before {
+    content: "";
+    position: absolute;
+    inset: -1px var(--space-8) auto;
+    height: 2px;
+    border-radius: 0 0 2px 2px;
+    background: linear-gradient(90deg, transparent, var(--color-brand-500), transparent);
+  }
+}
+
+.demoPill {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-4);
+  padding: var(--space-1) var(--space-3);
+  border: 1px solid var(--color-brand-100);
+  border-radius: var(--radius-full);
+  background: var(--color-brand-50);
+  color: var(--color-brand-700);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+}
+
+.liveDot {
+  position: relative;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-brand-500);
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: inherit;
+    animation: ping 1.8s cubic-bezier(0, 0, 0.2, 1) infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    &::after {
+      animation: none;
+    }
+  }
+}
+
+@keyframes ping {
+  75%,
+  100% {
+    transform: scale(2.6);
+    opacity: 0;
+  }
+}
+
+.cardTitle {
+  margin-bottom: var(--space-2);
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: var(--letter-spacing-tight);
+  line-height: var(--line-height-tight);
+}
+
+.cardLead {
+  margin-bottom: var(--space-6);
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-relaxed);
+  color: var(--color-text-secondary);
+}
+
+// Show/hide password inside the field.
+.reveal {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-md);
+  color: var(--color-text-tertiary);
+  cursor: pointer;
+  transition: color 0.15s, background-color 0.15s;
+
+  &:hover {
+    color: var(--color-text-primary);
+    background: var(--color-bg-hover);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-border-focus);
+    outline-offset: 1px;
+  }
+}
+
+.submit {
+  svg {
+    transition: transform 0.2s ease;
+  }
+
+  &:hover:not(:disabled) svg {
+    transform: translateX(3px);
+  }
+}
+
+.cardFooter {
+  margin-top: var(--space-6);
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--color-border-subtle);
+  text-align: center;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+
+  a {
+    color: var(--color-text-link);
+    font-weight: var(--font-weight-medium);
+  }
+}
+
+.channels {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-2) var(--space-4);
+  margin-top: var(--space-6);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+}
+
+.channel {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--color-text-primary);
+}
+
+.channelDot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+}
