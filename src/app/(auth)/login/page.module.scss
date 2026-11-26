@@ -168,7 +168,10 @@
   place-items: center;
   width: 32px;
   height: 32px;
+  padding: 0;
+  border: 0;
   border-radius: var(--radius-md);
+  background: transparent;
   color: var(--color-text-tertiary);
   cursor: pointer;
   transition: color 0.15s, background-color 0.15s;
